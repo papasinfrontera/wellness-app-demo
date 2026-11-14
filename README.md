@@ -1,27 +1,28 @@
-# WELLNESS APP — Fundación tecnológica (Sprint 6.1)
+# WELLNESS APP — Demo preservada
 
-Este repositorio contiene el **nuevo código de arquitectura** para WELLNESS APP. El demo actual en Vercel permanece separado y no será reemplazado antes de validar la migración.
+Este repositorio conserva una **copia exacta** de las cuatro páginas HTML de la demo aprobada de WELLNESS APP, obtenidas del despliegue de producción y verificadas contra los archivos publicados.
 
-## Objetivo
+## Demo pública
 
-Crear una plataforma longitudinal con Next.js, TypeScript y PostgreSQL/Supabase, preparada desde el inicio para documentos de laboratorio, exportaciones WHOOP, una base de conocimiento científico RAG y el motor independiente de Clinical Rules.
+https://wellness-app-demo-sprint1-papasinfronteras-projects.vercel.app
 
-## Seguridad
+## Archivos preservados
 
-**Repositorio público: NUNCA guardar datos reales de pacientes, informes clínicos, tokens, contraseñas, exportaciones WHOOP ni PDFs.** Solo código, ejemplos sintéticos y documentación técnica. Los archivos personales irán a almacenamiento privado con políticas de acceso por usuario.
+- `index.html` — catálogo de 128 indicadores, resultados, filtros y PhenoAge.
+- `apob.html` — ficha longitudinal de ApoB.
+- `trigliceridos.html` — ficha longitudinal de triglicéridos.
+- `relacion-trigliceridos-hdl.html` — ficha longitudinal de TG/HDL.
 
-## Estado
+Los cuatro archivos se compararon textualmente con la versión pública de Vercel. Este repositorio no es responsable del despliegue de producción vigente y no se ha conectado a ese proyecto de Vercel.
 
-- Sprint 6.1: estructura y contratos iniciales.
-- Supabase: pendiente de crear y conectar.
-- Importación PDF y WHOOP: pendientes de implementar.
-- IA + base científica: arquitectura definida; sin conexión aún.
+## Nuevo desarrollo independiente
 
-## Gobernanza científica
+El futuro stack Next.js, TypeScript, Supabase PostgreSQL, importadores PDF/WHOOP, Clinical Rules y WELLNESS Intelligence se desarrolla en un repositorio separado:
 
-El equipo técnico puede incorporar fuentes candidatas. Las fuentes no pasan a estado `approved` para interpretaciones clínicas sin revisión y aprobación del Consejo Médico-Científico.
+https://github.com/papasinfrontera/wellness-app-platform-BD/tree/sprint-6-1-foundation
 
-## Entornos
+La rama `sprint-6-1-foundation` de este repositorio es el andamiaje previo, conservado como registro histórico. El desarrollo activo debe continuar en `wellness-app-platform-BD`.
 
-- Demo estable existente: `https://wellness-app-demo-sprint1-papasinfronteras-projects.vercel.app`
-- Nueva aplicación Next.js: desarrollo aislado hasta la aprobación de migración.
+## Nota sobre privacidad
+
+Por autorización explícita del titular, estas páginas están almacenadas en un repositorio **público** y contienen datos personales de salud. Cualquier persona puede consultar y copiar los archivos. No añadir secretos, contraseñas, claves privadas ni datos de otras personas sin autorización.
