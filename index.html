@@ -1,0 +1,511 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WELLNESS APP · Mis análisis de sangre</title><style>
+:root{--purple:#6034e8;--lime:#c8fa48;--text:#171737;--muted:#77758f;--border:#e7e4f5}
+*{box-sizing:border-box}html,body{margin:0;height:100%}body{font:14px Inter,Arial,sans-serif;color:var(--text);background:#f6f5fb}
+button,select,input{font:inherit}button{cursor:pointer}
+header{height:66px;display:flex;align-items:center;justify-content:space-between;gap:18px;background:#fff;border-bottom:1px solid var(--border);padding:0 clamp(20px,3%,50px)}
+header strong{font-size:18px;white-space:nowrap}header strong span{color:var(--purple)}
+header nav{display:flex;gap:8px;align-items:center}header nav a{text-decoration:none;color:#343056;border-radius:22px;padding:11px 16px;font-size:12px;background:#f4f0ff}
+header nav a.on{background:var(--purple);color:white}.nav-pending{color:#655f7a;border-radius:22px;padding:11px 16px;font-size:12px;background:#f4f0ff;opacity:.75}
+.avatar{background:#161338;color:#fff;border-radius:50%;height:38px;width:38px;display:grid;place-items:center;font-weight:700}
+main{max-width:1760px;margin:auto;padding:24px clamp(18px,3%,50px);height:calc(100dvh - 66px);min-height:720px;display:flex;flex-direction:column;gap:15px}
+.intro{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.eyebrow{font-size:10px;color:#6236e8;font-weight:800;letter-spacing:1.6px}
+h1{font-size:clamp(29px,2.8vw,38px);letter-spacing:-1px;margin:7px 0 4px}
+p{color:var(--muted);margin:0;font-size:13px}
+.age{background:linear-gradient(115deg,#edffb9,#c9f64a);border:1px solid #b3e743;border-radius:19px;padding:18px 25px;display:flex;align-items:center;gap:18px;min-width:250px}
+.age .icon{font-size:29px}.age strong{display:block;font-size:15px}.age .value{font-size:13px;color:#4b5d27;margin-top:7px}
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.stat{background:#fff;border:1px solid #eeeaf7;border-radius:18px;padding:17px 18px;display:flex;align-items:center;gap:13px;box-shadow:0 6px 16px #27214f06;min-height:86px}
+.stat .icon{width:43px;height:43px;display:grid;place-items:center;background:#f0eaff;color:#663af0;border-radius:14px;font-size:20px;flex:none}
+.stat:nth-child(2) .icon{background:#edffc3;color:#578009}
+.stat:nth-child(3) .icon{background:#e2f3fd;color:#2e9ad1}
+.stat:nth-child(4) .icon{background:#fff0da;color:#f29d1e}
+.stat:nth-child(5) .icon{background:#efeff5;color:#9998ad}
+.stat strong{font-size:30px;line-height:1.1;display:block}.stat small{font-size:11px;color:#59566e;font-weight:600}
+.content{display:grid;grid-template-columns:minmax(205px,275px) minmax(0,1fr);gap:14px;flex:1;min-height:0}
+.card{background:white;border:1px solid var(--border);border-radius:20px;padding:18px;box-shadow:0 10px 25px #1d184b09;min-height:0}
+#categorias{display:flex;flex-direction:column;min-height:0}
+.card h3{margin:0 0 15px;font-size:17px;letter-spacing:-.3px}
+.tiles{display:flex;flex-direction:column;gap:3px;overflow:auto;min-height:0;scrollbar-width:thin}
+.tile{display:flex;align-items:center;gap:10px;border:0;background:white;border-radius:10px;padding:9px 10px;width:100%;text-align:left;color:#282543;font-weight:650;font-size:12px;min-height:35px}
+.tile i{font-style:normal;color:#7341ea;width:22px;font-size:16px;text-align:center}.tile span{flex:1;line-height:1.2}
+.tile .sub{background:#faf9fe;border:1px solid #e8e2f8;color:#6d6587;border-radius:15px;padding:2px 7px;font-size:10px}
+.tile.on{background:#6236e8;color:white}.tile.on i{color:white}.tile.on .sub{color:#42228d}
+.tile:hover:not(.on){background:#f7f4ff}
+#indicadores{display:flex;flex-direction:column;min-height:0;padding:20px 23px}
+#indicators-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px}
+#indicators-toolbar h3{margin:0;font-size:20px}
+#view-toggle{display:flex;background:#f5f2fc;border:1px solid #e8e1fa;border-radius:13px;padding:3px;gap:3px}
+#view-toggle button{border:0;background:transparent;padding:8px 12px;border-radius:10px;font-size:11px;color:#5e587b}
+#view-toggle button.selected{background:#6034e8;color:white}
+.tools{display:grid;grid-template-columns:minmax(0,1fr) 200px 160px;gap:8px;margin-bottom:12px}
+input,select{border:1px solid #e2def2;border-radius:10px;padding:11px 13px;background:#fff;color:#2c2949;font-size:12px;min-width:0;width:100%}
+#q{grid-column:1/-1;background:#fdfcff;font-size:13px;padding:13px 15px}
+.tools select{display:none}
+#quick{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+#quick button{border:1px solid #e5dff6;background:#fff;color:#45405e;border-radius:11px;padding:9px 13px;font-size:11px;white-space:nowrap}
+#quick button.on{background:#6034e8;color:white;border-color:#6034e8}
+#sortbox{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 9px;font-size:12px}
+#sortbox select{max-width:145px;padding:8px 10px}
+#count{color:#75728e;font-size:12px}
+.list-head,.result{display:grid;grid-template-columns:minmax(200px,2.8fr) minmax(65px,.7fr) minmax(70px,.7fr) minmax(100px,1.15fr) minmax(145px,1.4fr) 16px;align-items:center;gap:10px}
+.list-head{border-radius:10px 10px 0 0;background:#f1ecff;padding:11px 14px;font-size:11px;font-weight:800;flex:none}
+#results{overflow:auto;flex:1;min-height:0;scrollbar-width:thin;scrollbar-color:#c9c0e9 transparent}
+.result{padding:10px 14px;border-bottom:1px solid #eeedf5;cursor:pointer;font-size:12px;min-height:42px}
+.result:hover{background:#faf8ff}.result:focus-visible{outline:2px solid var(--purple);outline-offset:-2px}
+.result .name{font-weight:700}.result .value{font-weight:800}.result .unit{color:#69667e;font-size:11px}.result .category{font-size:11px;color:#5b5774}
+.result .arrow{font-size:20px;color:var(--purple)}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border-radius:9px;font-size:10px;font-weight:800;white-space:nowrap}
+.pill.optimo{background:#dfff8f;color:#375a0a}.pill.suficiente{background:#d5f0ff;color:#226b93}.pill.fuera{background:#ffe3c1;color:#9e611c}.pill.sin{background:#eeeeF3;color:#6a687b}
+#indicators-empty{display:none}
+#medical-note{display:none;color:#5e5b74;background:#f6f4fc;border-radius:8px;padding:10px;font-size:11px;margin:8px 0}
+.medical #medical-note{display:block}
+.hidden,.sr-only{display:none!important}
+#history-tools,#audit-status,#unassigned,#alert,#category-info,.source-note{display:none!important}
+footer{font-size:10px;color:#aaa6b8;text-align:right;padding:4px 2px}
+.overlay{position:fixed;inset:0;background:#14132d96;display:none;justify-content:flex-end;z-index:90}
+.modal{width:min(580px,100%);height:100%;overflow-y:auto;padding:25px;background:#fff;box-shadow:-12px 0 40px #19133c25}
+.close{float:right;border:0;background:#f0ecff;border-radius:9px;padding:10px;font-weight:650}
+.modal .top{font-size:10px;color:#6540eb;letter-spacing:1px;font-weight:800}
+.modal h2{margin-top:36px;line-height:1.15;font-size:26px}.modal em{font-size:34px;font-style:normal;font-weight:800}
+#dareas{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+#dareas .tag{background:#eae5ff;color:#5938c7;padding:6px 9px;border-radius:9px;font-size:10px}
+#dareas .tag.health{background:#e6faad;color:#4a6614}
+#dmeaningwrap{background:#f8f6ff;border-radius:15px;padding:17px;margin:17px 0}
+#dmeaning{line-height:1.6;color:#37334e;font-size:13px}#dcontext{margin-top:8px;font-size:12px;color:#79748e}
+#dscience{margin-top:10px;font-size:11px}#dsource-link{color:#5e35e4}
+#dmed-explanation,#med-meta{display:none} .overlay.medical #dmed-explanation{display:block;background:#f8f7ff;padding:13px;border-radius:12px}.overlay.medical #med-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:11px}
+#dmedical-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#dmedical-fields small{display:block}
+#trend-card{background:#faf9ff;border-radius:13px;padding:15px;margin:10px 0}
+.nohist{background:#f5f1ff;border-radius:10px;padding:15px;margin:10px 0}
+.status{margin:15px 0}.sub{font-size:11px;color:#737189}
+#history-status{display:none}#history-file{display:none}
+@media(max-width:1000px){main{height:auto;min-height:calc(100dvh - 66px)}.content{grid-template-columns:210px minmax(0,1fr)}.stats{gap:7px}.stat{padding:11px;gap:7px}.stat strong{font-size:24px}.stat .icon{width:30px;height:30px}.list-head,.result{grid-template-columns:minmax(150px,2.4fr) 65px 65px 105px 15px}.list-head span:nth-child(5),.result .category{display:none}}
+@media(max-width:730px){header{height:56px;padding:0 13px}header strong{font-size:14px}header nav{gap:2px}header nav a{padding:8px;font-size:10px}header nav .nav-pending:nth-child(n+3){display:none}.avatar{display:none}main{height:auto;min-height:calc(100dvh - 56px);padding:14px 11px;gap:10px}.intro{align-items:stretch;flex-direction:column}.intro h1{font-size:27px}.age{min-width:0;padding:11px 14px}.age .icon{font-size:22px}.stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.stat{min-height:69px;display:block;padding:10px}.stat .icon{width:25px;height:25px;font-size:14px;margin-bottom:6px}.stat strong{font-size:22px}.stat small{font-size:10px}.content{grid-template-columns:1fr}.card{padding:12px;border-radius:16px}#categorias{display:block}#categorias h3{margin:2px 0 8px;font-size:15px}.tiles{flex-direction:row;overflow-x:auto;gap:7px;padding-bottom:4px;scrollbar-width:thin}.tile{width:auto;min-width:max-content;padding:9px 11px;min-height:0}.tile .sub{display:none}#indicadores{padding:12px;min-height:500px}#indicators-toolbar h3{font-size:17px}#view-toggle button{padding:7px;font-size:10px}#quick{flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px}#quick button{flex:none;padding:7px 10px}.list-head,.result{grid-template-columns:minmax(110px,2fr) minmax(57px,.75fr) minmax(82px,1.2fr) 12px;gap:5px;padding:10px 5px}.list-head span:nth-child(3),.result .unit{display:none}.list-head span:nth-child(5),.result .category{display:none}.result{font-size:11px}.pill{padding:5px 6px;font-size:9px}#results{max-height:570px}.tools{display:block}#q{margin-bottom:2px}footer{text-align:center}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* Approved final arrangement: age at left, lab dashboard at right */
+main{min-height:0;gap:11px;padding-top:15px;padding-bottom:14px}
+.intro{flex:none;min-height:76px}
+.summary-row{display:grid;grid-template-columns:minmax(325px,2.2fr) minmax(0,4.9fr);gap:12px;align-items:stretch;flex:none}
+.summary-row .age{width:100%;min-width:0;min-height:128px;padding:16px 21px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);gap:14px;background:linear-gradient(115deg,#edffb9,#c6f844);border-color:#b4e63c;align-items:center}
+.age-main{min-width:0}.age-title{font-size:14px;font-weight:800;white-space:nowrap}.age-number{font-size:43px;font-weight:850;letter-spacing:-2px;line-height:1.1;margin-top:7px;white-space:nowrap}.age-number span{font-size:15px;font-weight:600;letter-spacing:0}.age-label{font-size:11px;color:#4e6127;margin-top:2px}
+.age-detail{border-left:1px solid #b2d774;padding-left:16px;font-size:11px;display:grid;gap:9px;color:#475729}.age-detail strong{display:block;font-size:17px;color:#222d1c;margin-top:4px}.age-detail .age-difference{font-size:18px;color:#267f66}
+.summary-row .stats{grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
+.summary-row .stat{padding:13px 10px;min-height:128px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:7px}
+.summary-row .stat .icon{width:31px;height:31px;font-size:17px;border-radius:11px}.summary-row .stat strong{font-size:29px}.summary-row .stat small{font-size:11px}
+.summary-row .stat:nth-child(4) .icon{background:#ffe8e8;color:#c82631}
+.pill.fuera{background:#ffe4e6;color:#ae1b2b}
+.result .abnormal-value{color:#ca1b30}
+.content{grid-template-columns:minmax(195px,250px) minmax(0,1fr);gap:12px}
+#indicadores{padding:17px 21px}#categorias{padding:14px}
+.result{min-height:41px;padding-top:8px;padding-bottom:8px}
+#quick{margin-bottom:6px}#sortbox{margin-bottom:7px}
+@media(max-width:1150px){.summary-row{grid-template-columns:1fr}.summary-row .age{min-height:110px}.summary-row .stats{grid-template-columns:repeat(5,1fr)}.summary-row .stat{min-height:85px;flex-direction:row;align-items:center}.content{grid-template-columns:205px minmax(0,1fr)}}
+@media(max-width:730px){main{gap:9px;padding-top:12px}.intro{min-height:auto}.summary-row .age{grid-template-columns:1fr 1fr;min-height:113px;padding:12px 15px}.age-number{font-size:36px}.age-detail{padding-left:12px}.age-detail strong{font-size:15px}.summary-row .stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.summary-row .stat{min-height:72px;display:block;padding:10px}.summary-row .stat strong{font-size:23px}.content{grid-template-columns:1fr}#indicadores{padding:12px}.result{min-height:44px}}
+
+/* Compact laboratory list · current-range mini indicator */
+.content{grid-template-columns:minmax(190px,218px) minmax(0,1fr)}
+#indicadores{padding:17px 18px}
+.list-head,.result{grid-template-columns:minmax(190px,2.2fr) minmax(105px,1fr) minmax(100px,1.25fr) minmax(155px,1.8fr) 16px;gap:11px}
+.list-head span:nth-child(3){display:block}
+.result .value-and-unit{display:flex;align-items:baseline;gap:5px;white-space:nowrap}
+.result .value-and-unit strong{font-size:13px}
+.result .value-and-unit small{font-size:10px;color:#6c6880}
+.result .range-cell{display:flex;align-items:center;width:100%;min-width:0}
+.result .range-cell svg{width:100%;max-width:240px;height:34px;overflow:visible}
+.result .range-empty{font-size:10px;color:#908b9f;line-height:1.2}
+.result{min-height:44px;padding-top:5px;padding-bottom:5px}
+.result .name{line-height:1.22;font-size:12px}
+.result .pill{font-size:10px;white-space:nowrap}
+.result .arrow{justify-self:end}
+.result .abnormal-value{color:#c2253d}
+@media(max-width:1100px) and (min-width:731px){.content{grid-template-columns:185px minmax(0,1fr)}.list-head,.result{grid-template-columns:minmax(140px,2fr) minmax(75px,.9fr) minmax(100px,1.1fr) minmax(115px,1.4fr) 10px;gap:5px}.result .range-cell svg{max-width:175px}.result .pill{padding:5px 6px;font-size:9px}}
+@media(max-width:730px){.list-head{display:none}.result{display:grid;grid-template-columns:minmax(0,1fr) minmax(115px,41%) 13px;grid-template-rows:auto auto;gap:5px 8px;min-height:79px;padding:10px 5px}.result .name{grid-column:1;grid-row:1;align-self:center;font-size:12px}.result .value-and-unit{grid-column:1;grid-row:2}.result .value-and-unit strong{font-size:15px}.result .value-and-unit small{font-size:10px}.result .status-cell{grid-column:2;grid-row:1;justify-self:end}.result .range-cell{grid-column:2;grid-row:2;align-self:center;justify-self:stretch}.result .range-cell svg{height:28px;max-width:none}.result .arrow{grid-column:3;grid-row:1 / span 2;align-self:center}.result .range-empty{text-align:right;display:block;width:100%;font-size:10px}#results{max-height:560px}#indicadores{padding:12px}}
+
+/* Audit-safe presentation: calculated values and provenance concerns */
+.stats{grid-template-columns:repeat(6,minmax(0,1fr))}
+.stat:last-child .icon{background:#efeaff;color:#653ddf}
+.pill.revision{background:#f0e9ff;color:#653bd4;border:1px solid #e0d4fa}
+.result .derived-tag{display:inline-flex;margin-left:6px;vertical-align:middle;color:#6b4ec9;background:#eee9ff;border-radius:5px;padding:2px 4px;font-size:9px;font-weight:600}
+@media(max-width:1200px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:730px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}.result .derived-tag{display:block;margin:3px 0 0;width:max-content}}
+.summary-row .stats{grid-template-columns:repeat(6,minmax(0,1fr))}.summary-row .stat{padding:10px 8px}.summary-row .stat strong{font-size:25px}.summary-row .stat small{font-size:10px}@media(max-width:1150px){.summary-row .stats{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:730px){.summary-row .stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* Sprint 5P: count available results incl. derived indicators */
+.stats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.stat-results .icon{background:#eae5ff;color:#5e35da}
+@media(max-width:1200px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:730px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* Welcome text approved for Análisis de sangre; reusable for future authenticated profiles */
+.intro h1{font-size:clamp(25px,2.4vw,37px);line-height:1.16;letter-spacing:-.7px;margin:5px 0 8px}
+.intro p{font-size:clamp(13px,1.1vw,15px);line-height:1.4;margin:0}
+.intro .eyebrow{font-weight:750;letter-spacing:1.1px}
+@media(max-width:730px){.intro h1{font-size:clamp(24px,6vw,31px);line-height:1.17}.intro p{font-size:13px}}
+</style></head><body>
+<header><strong>W<span>.</span> &nbsp; WELLNESS APP</strong><nav><a class="on" href="index.html">Mis análisis</a><span class="nav-pending">Dispositivos conectados</span><span class="nav-pending">Hábitos</span><span class="nav-pending">Dashboard</span></nav><span class="avatar">RF</span></header>
+<main><section class="intro"><div><span class="eyebrow">MIS ANÁLISIS DE SANGRE</span><h1><span class="greeting-name">Rafael</span>, tus resultados cuentan una historia.</h1><p>Descubre cómo evolucionan tus indicadores.</p></div></section><section class="summary-row"><div class="age" aria-label="Resultado PhenoAge"><div class="age-main"><div class="age-title">♧ &nbsp; Edad PhenoAge</div><div class="age-number">56,4 <span>años</span></div><div class="age-label">Edad fenotípica</div></div><div class="age-detail"><div>Edad cronológica<strong>63,9 años</strong></div><div>Diferencia<strong class="age-difference">−7,5 años</strong></div></div></div>
+<section class="stats" aria-label="Resumen de indicadores"><div class="stat"><span class="icon">⚗</span><div><strong id="stat-total">128</strong><small>Indicadores</small></div></div><div class="stat stat-results"><span class="icon">◉</span><div><strong id="stat-measured">56</strong><small>Con resultado</small></div></div><div class="stat"><span class="icon">✓</span><div><strong id="stat-opt">31</strong><small>Óptimos</small></div></div><div class="stat"><span class="icon">●</span><div><strong id="stat-suf">10</strong><small>Suficientes</small></div></div><div class="stat"><span class="icon">⚠</span><div><strong id="stat-review">15</strong><small>Fuera de rango</small></div></div><div class="stat"><span class="icon">—</span><div><strong id="stat-missing">72</strong><small>Sin resultados</small></div></div></section></section>
+<section class="content">
+<aside class="card" id="categorias"><h3>◈ &nbsp; Categorías</h3><div id="tiles" class="tiles"></div></aside>
+<section class="card" id="indicadores"><div id="indicators-toolbar"><h3>☷ &nbsp; Explorar mis indicadores</h3><div id="view-toggle"><button class="selected" id="basic" type="button">Usuario</button><button id="medical" type="button">Médico</button></div></div><div class="tools"><input id="q" aria-label="Buscar indicador" placeholder="⌕  Buscar: glucosa, glicemia, HbA1c, ApoB..."><select id="category"><option value="">Todas las categorías</option></select><select id="state"><option value="">Todos los estados</option><option value="Fuera de rango">Fuera de rango</option><option value="Suficiente">Suficiente</option><option value="Óptimo">Óptimo</option><option value="Sin datos disponibles">Sin datos</option></select></div>
+<div id="quick"><button data-quick="" class="on" type="button">Todos (128)</button><button data-quick="Óptimo" type="button">✓ Óptimos (31)</button><button data-quick="Suficiente" type="button">● Suficientes (10)</button><button data-quick="Fuera de rango" type="button">⚠ Fuera de rango (15)</button><button data-quick="Sin datos disponibles" type="button">— Sin resultados (72)</button></div>
+<div id="sortbox"><span id="count">128 indicadores</span><select id="sort" aria-label="Ordenar indicadores"><option value="alpha">Orden: A–Z</option><option value="status">Por estado</option><option value="value">Por resultado</option></select></div>
+<div class="list-head"><span>Indicador</span><span>Resultado</span><span>Estado</span><span>Posición actual</span><span></span></div><div id="results"></div><div id="indicators-empty"></div>
+<div id="medical-note">Vista profesional: datos de laboratorio y clasificación original de la fuente. Los intervalos numéricos de referencia no están disponibles para este conjunto.</div>
+<div id="history-tools"><button id="history-pick" type="button">Añadir resultados históricos</button><input id="history-file" type="file" accept=".json"><span id="history-status"></span></div><div id="audit-status"></div><div id="unassigned"></div><div id="category-info"></div><div id="alert"></div><span id="available" class="sr-only"></span><span id="total" class="sr-only"></span><div id="line" class="sr-only"></div><div id="legend" class="sr-only"></div><input id="file" type="file" accept=".json" class="sr-only">
+</section></section><footer>WELLNESS APP</footer></main><div class="overlay" id="overlay"><div class="modal"><button class="close" onclick="document.getElementById('overlay').style.display='none'">✕ Cerrar</button><div class="top">FICHA INDIVIDUAL</div><h2 id="dname"></h2><div id="dnames"></div><em id="dvalue"></em><div class="status" id="dstatus"></div><div id="dareas"></div><section id="dmeaningwrap"><h3>¿Qué es este indicador?</h3><div id="dmeaning"></div><div id="dcontext"></div><div id="dscience"><b>Fuente educativa:</b> <a id="dsource-link" rel="noopener noreferrer" target="_blank">Pendiente de documentación individual</a></div></section><section id="dmed-explanation"><b>Interpretación técnica y trazabilidad</b><p>La clasificación importada describe el estado según la fuente original. No existe suficiente información para reconstruir el intervalo numérico aplicado.</p><div id="dmedical-fields"><div><b>Unidad original</b><small id="dunit"></small></div><div><b>Fecha de muestra</b><small id="dsample"></small></div><div><b>Rango de laboratorio</b><small>No informado</small></div><div><b>Umbral clínico</b><small>No incorporado en este sprint</small></div></div></section><div id="med-meta"><div><b>Procedencia</b><br>Informe de plataforma conectada</div><div><b>Rangos numéricos</b><br>No disponibles</div><div><b>Método</b><br>No especificado</div><div><b>Fecha de muestra</b><br>Pendiente</div></div><hr><h3>Historial de resultados</h3><div id="trend-card"><div class="sub">Importa resultados históricos reales para comparar mediciones.</div><svg id="trend-svg" viewBox="0 0 360 170" aria-label="Gráfico histórico" style="display:none;width:100%;height:170px"></svg><div id="trend-list"></div></div><h3>Procedencia</h3><p>Actualización reportada: <span id="ddate"></span></p><p>Fecha de toma de muestra: no disponible en las capturas.</p><div class="nohist" id="nohist"><b>Historial pendiente de nuevas mediciones</b><p>Una sola medición no permite trazar tendencias.</p></div><div class="source-note">Los estados corresponden a la clasificación de la plataforma de origen, no a una valoración clínica independiente.</div></div></div><script>
+"use strict";
+let data=[],active="",quick="",resultsVisible=[];
+const cats=[
+["Sangre","◉"],["Salud cerebral","◈"],["Salud digestiva","✣"],["Corazón y circulación","♡"],["Hormonas","◇"],["Inflamación","✳"],["Riñones","♧"],["Salud metabólica","▥"],["Vitaminas y nutrientes","✿"],["Estrés y energía","ϟ"],["Exposición y toxinas","⚗"]];
+const rules=[
+/\b(hemoglobin|hematocrit|blood cell|platelet|corpuscular|basophil|eosinophil|lymphocyte|monocyte|neutrophil|red cell|reticulocyte|rdw|mcv|mch|mchc|rbc|wbc)\b/i,
+/vitamin b12|folate|homocysteine|thyroid/i,
+/albumin|globulin|bilirubin|alkaline phosphatase|aminotransferase|total protein|fib-4|gamm(a|a-)|ggt/i,
+/cholesterol|apolipoprotein|atherogenic|lipoprotein|triglyceride|ldl|hdl|homocysteine/i,
+/testosterone|estradiol|cortisol|dhea|thyroid|tsh|free t3|free t4|prolactin|progesterone|luteinizing|follicle stimulating|shbg/i,
+/crp|inflammation|immune|myeloperoxidase|mpo/i,
+/creatinine|blood urea|bun\/|uric acid|potassium|sodium|chloride|osmolality|cystatin|egfr|filtration/i,
+/glucose|a1c|insulin|homa|fructosamine|triglyceride|atherogenic|1,5-anhydroglucitol/i,
+/vitamin|calcium|magnesium|iron|ferritin|folate|potassium|phosphorus|zinc|selenium|iodine|copper/i,
+/cortisol|dhea|thyroid|glucose|testosterone|creatine kinase/i,
+/lead|mercury|cadmium|arsenic|toxin/i];
+
+function auditMedicalCatalog(items){
+ if(!Array.isArray(items)||items.length!==128)throw Error("El catálogo debe contener 128 indicadores.");
+ const seen=new Set(),counts={"Óptimo":0,"Suficiente":0,"Fuera de rango":0,"Sin datos disponibles":0};let measured=0;
+ for(let i=0;i<items.length;i++){
+  const m=items[i];
+  if(!m||typeof m.indicador!=="string"||!m.indicador.trim())throw Error("Nombre ausente en registro "+(i+1));
+  let name=m.indicador.trim().normalize("NFKC").toLocaleLowerCase("es");
+  if(seen.has(name))throw Error("Indicador duplicado: "+m.indicador);seen.add(name);
+  if(!Object.prototype.hasOwnProperty.call(counts,m.clasificacion_whoop))throw Error("Estado no reconocido en "+m.indicador);
+  if(m.valor!==null){if(typeof m.valor!=="number"||!Number.isFinite(m.valor))throw Error("Valor no numérico en "+m.indicador);measured++;}
+  if(m.valor===null&&m.clasificacion_whoop!=="Sin datos disponibles")throw Error("Resultado faltante con estado incorrecto: "+m.indicador);
+  if(m.valor!==null&&m.clasificacion_whoop==="Sin datos disponibles")throw Error("Resultado medido marcado sin datos: "+m.indicador);
+  if(m.unidad!==null&&m.unidad!==undefined&&typeof m.unidad!=="string")throw Error("Unidad inválida: "+m.indicador);
+  counts[m.clasificacion_whoop]++;
+ }
+ if(measured!==56||counts["Óptimo"]!==31||counts["Suficiente"]!==10||counts["Fuera de rango"]!==15||counts["Sin datos disponibles"]!==72)throw Error("Los conteos no coinciden con el lote validado: "+measured+" resultados; "+JSON.stringify(counts));
+ return {total:items.length,measured,counts};
+}
+const labels={"Fuera de rango":"Fuera de rango","Óptimo":"Óptimo","Suficiente":"Suficiente","Sin datos disponibles":"Sin datos","En revisión":"En revisión"};
+function esc(x){return String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function state(m){return labels[m.clasificacion_whoop]?m.clasificacion_whoop:"Sin datos disponibles"}
+/* Spanish names and aliases are display/search metadata; raw imported records remain unchanged. */
+const metricLocalization={
+ "Glucose":{name:"Glucosa",aliases:["glicemia","glucemia","glucosa en sangre","glucose","blood glucose","azúcar en sangre"]},
+ "Hemoglobin A1c (HbA1c)":{name:"Hemoglobina glucosilada (HbA1c)",aliases:["hemoglobina glicosilada","hemoglobina glicada","a1c","hba1c","glucosa promedio tres meses"]},
+ "Estimated Average Glucose (eAG)":{name:"Glucosa media estimada (eAG)",aliases:["glicemia media estimada","glucemia media estimada","glucosa promedio estimada","eag","estimated average glucose"]},
+ "Insulin":{name:"Insulina",aliases:["insulin"]},
+ "1,5-Anhydroglucitol (1,5-AG)":{name:"1,5-anhidroglucitol (1,5-AG)",aliases:["anhydroglucitol","glucitol","1,5-ag"]}
+};
+function displayMetric(m){return metricLocalization[m.indicador]?.name||m.indicador}
+function normalizeMetricQuery(t){return String(t).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("es").trim()}
+function matchesMetricQuery(m,query){
+ const aliases=metricLocalization[m.indicador]?.aliases||[];
+ return normalizeMetricQuery([m.indicador,displayMetric(m),...aliases].join(" ")).includes(normalizeMetricQuery(query));
+}
+function fit(m,cat){if(!cat)return true;let i=cats.findIndex(x=>x[0]===cat);return i>=0&&rules[i].test(m.indicador)}
+function badge(s){let c=s==="Óptimo"?"optimo":s==="Suficiente"?"suficiente":s==="Fuera de rango"?"fuera":s==="En revisión"?"revision":"sin";return '<span class="pill '+c+'">'+esc(labels[s]||"Sin datos")+'</span>'}
+const file=document.getElementById("file"),q=document.getElementById("q"),selCat=document.getElementById("category"),selState=document.getElementById("state"),sort=document.getElementById("sort");
+cats.forEach(x=>selCat.add(new Option(x[0],x[0])));
+function render(){
+const terms=q.value.toLocaleLowerCase("es").trim(),s=selState.value;
+document.getElementById("tiles").innerHTML=cats.map(([c,icon],i)=>{
+const n=data.filter(m=>fit(m,c)).length;
+return '<button class="tile '+(active===c?"on":"")+'" type="button" data-cat="'+i+'"><i>'+icon+'</i>'+esc(c)+'<div class="sub">'+(data.length?n+' relacionados':"Explorar")+'</div></button>'
+}).join("");
+document.querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>{let c=cats[+b.dataset.cat][0];active=active===c?"":c;selCat.value=active;render()}));
+resultsVisible=data.filter(m=>fit(m,active)&&(!s||state(m)===s)&&matchesMetricQuery(m,terms));
+const priority={"En revisión":0,"Fuera de rango":1,"Suficiente":2,"Óptimo":3,"Sin datos disponibles":4};
+resultsVisible.sort((a,b)=>sort.value==="status"?priority[state(a)]-priority[state(b)]||a.indicador.localeCompare(b.indicador):sort.value==="value"?(b.valor??-Infinity)-(a.valor??-Infinity):a.indicador.localeCompare(b.indicador));
+document.getElementById("count").textContent=data.length?resultsVisible.length+" de "+data.length+" indicadores":"Esperando importación privada";
+document.getElementById("indicators-empty").style.display=data.length?"none":"flex";
+document.getElementById("results").innerHTML=resultsVisible.map((m,i)=>'<div class="result" data-idx="'+i+'" role="button" tabindex="0"><div><b>'+esc(m.indicador)+'</b><small>'+esc(cats.filter(x=>fit(m,x[0])).map(x=>x[0]).slice(0,2).join(" · ")||"Sin categoría asignada")+'</small></div><div class="measurement"><b>'+(m.valor===null?"—":esc(m.valor))+' <small>'+esc(m.unidad)+'</small></b>'+badge(state(m))+'</div><span>›</span></div>').join("");
+document.querySelectorAll("[data-idx]").forEach(b=>{const go=()=>show(resultsVisible[+b.dataset.idx]);b.addEventListener("click",go);b.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}})});
+document.querySelectorAll("[data-quick]").forEach(b=>b.classList.toggle("on",b.dataset.quick===s));
+}
+function show(m){if(/(triglycerid|triglicérid).*hdl|hdl.*(triglycerid|triglicérid)|tg\s*\/\s*hdl/i.test(m.indicador)){window.location.href="relacion-trigliceridos-hdl.html";return;}if(/triglycerid|triglicérid/i.test(m.indicador)){window.location.href="trigliceridos.html";return;}if(/apolipoprotein(a|e)? b|apolipoproteína b|^apob$/i.test(m.indicador)){window.location.href="apob.html";return;}selected=m;document.getElementById("dname").textContent=m.indicador;document.getElementById("dvalue").textContent=(m.valor===null?"—":m.valor)+" "+(m.unidad||"");document.getElementById("dstatus").innerHTML=badge(state(m));document.getElementById("ddate").textContent=m.fecha_actualizacion||"No indicada";document.getElementById("overlay").style.display="flex";drawHistory(m)}
+q.addEventListener("input",render);selCat.addEventListener("change",e=>{active=e.target.value;render()});selState.addEventListener("change",render);sort.addEventListener("change",render);
+document.querySelectorAll("[data-quick]").forEach(b=>b.addEventListener("click",()=>{selState.value=b.dataset.quick;render()}));
+file.addEventListener("change",async e=>{
+try{
+const f=e.target.files?.[0];if(!f)return;
+if(f.size>2000000)throw Error("Archivo demasiado grande");
+const j=JSON.parse(await f.text());
+const verification=auditMedicalCatalog(j.indicadores);
+if(!j.indicadores.every(m=>m&&typeof m.indicador==="string"&&(m.valor===null||typeof m.valor==="number")&&typeof m.clasificacion_whoop==="string"))throw Error("Formato incompatible");
+const unique=new Set(j.indicadores.map(m=>m.indicador.toLowerCase()));
+if(unique.size!==128)throw Error("Existen nombres repetidos");
+data=j.indicadores;document.getElementById('audit-status').innerHTML='<b>Integridad verificada:</b> '+verification.total+' únicos · '+verification.measured+' medidos · '+verification.counts['Sin datos disponibles']+' pendientes · Sin duplicados.';
+const statuses=["Óptimo","Suficiente","Fuera de rango","Sin datos disponibles"],colors=["#18c987","#7ebbc8","#f2a13a","#a9acb8"];
+const counts=statuses.map(s=>data.filter(m=>state(m)===s).length);
+document.getElementById("available").textContent=data.filter(m=>m.valor!==null).length;
+document.getElementById("total").textContent="de "+data.length+" en catálogo";
+document.getElementById("line").innerHTML=counts.map((n,i)=>'<span style="background:'+colors[i]+';flex:'+n+'"></span>').join("");
+document.getElementById("legend").innerHTML=counts.map((n,i)=>'<span style="white-space:nowrap">● '+n+" "+esc(labels[statuses[i]])+"</span>").join("");
+document.getElementById("alert").innerHTML='<span class="lime">Datos locales cargados</span> · 128 indicadores verificados: 56 resultados, 72 sin datos; 31 óptimos, 10 suficientes y 15 fuera de rango. Datos locales no enviados al servidor.';
+render();
+}catch(err){alert("No fue posible importar: "+err.message)}finally{file.value=""}
+});
+document.getElementById("overlay").addEventListener("click",e=>{if(e.target.id==="overlay")e.currentTarget.style.display="none"});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.getElementById("overlay").style.display="none"});
+
+// Explicit editorial category associations for the 128-name reference catalog;
+// these are navigational associations, not medical diagnoses or clinical cutoffs.
+
+let selected=null,historical=[];
+const historyPick=document.getElementById("history-pick"),historyFile=document.getElementById("history-file");
+historyPick.addEventListener("click",()=>historyFile.click());
+historyFile.addEventListener("change",async()=>{
+try{
+const f=historyFile.files?.[0];if(!f)return;
+if(f.size>2000000)throw Error("Archivo demasiado grande");
+const obj=JSON.parse(await f.text());
+const rows=Array.isArray(obj)?obj:obj.mediciones;
+if(!Array.isArray(rows))throw Error("Debe ser un array o contener mediciones[]");
+if(rows.length>20000)throw Error("Demasiados registros");
+const currentNames=new Set(data.map(m=>m.indicador.toLowerCase()));
+const clean=rows.map((x,i)=>{
+if(!x||typeof x.indicador!=="string"||!currentNames.has(x.indicador.toLowerCase())||typeof x.valor!=="number"||!Number.isFinite(x.valor)||typeof x.unidad!=="string"||typeof x.fecha_muestra!=="string"||!/^20\d{2}-\d{2}-\d{2}$/.test(x.fecha_muestra)||Number.isNaN(Date.parse(x.fecha_muestra+"T00:00:00Z")))throw Error("Registro inválido #"+(i+1)+"; se requiere nombre del catálogo, valor numérico, unidad y fecha de muestra");
+return {indicador:x.indicador,valor:x.valor,unidad:x.unidad,fecha:x.fecha_muestra,fuente:typeof x.fuente==="string"?x.fuente:"Informe importado"};
+});
+historical=clean;
+document.getElementById("history-status").textContent=clean.length+" mediciones históricas importadas, solo en esta sesión";
+if(selected)drawHistory(selected);
+}catch(e){alert("Error de importación histórica: "+e.message)}
+finally{historyFile.value=""}
+});
+function drawHistory(m){
+const box=document.getElementById("trend-list"),chart=document.getElementById("trend-svg"),none=document.getElementById("nohist");
+const rows=historical.filter(x=>x.indicador.toLowerCase()===m.indicador.toLowerCase()&&x.unidad===(m.unidad||"")).sort((a,b)=>a.fecha.localeCompare(b.fecha));
+box.innerHTML=rows.map(x=>'<div class="trend-row"><span>'+esc(x.fecha)+'</span><b>'+esc(x.valor)+' '+esc(x.unidad)+'</b></div>').join("");
+const points=rows.slice();
+if(m.fecha_muestra&&typeof m.valor==="number")points.push({fecha:m.fecha_muestra,valor:m.valor,unidad:m.unidad||""});
+points.sort((a,b)=>a.fecha.localeCompare(b.fecha));
+none.style.display=points.length>=2?"none":"block";
+chart.style.display=points.length>=2?"block":"none";
+if(points.length<2){chart.replaceChildren();return}
+const vals=points.map(x=>x.valor),min=Math.min(...vals),max=Math.max(...vals),spread=max-min||1;
+const positions=points.map((x,i)=>({x:30+i*300/(points.length-1),y:135-(x.valor-min+spread*.15)/(spread*1.3)*110}));
+const path=positions.map((p,i)=>(i?"L":"M")+p.x.toFixed(1)+" "+p.y.toFixed(1)).join(" ");
+chart.innerHTML='<line x1="30" y1="142" x2="334" y2="142" stroke="#d8d4e8"/><path d="'+path+'" fill="none" stroke="#6845ee" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'+positions.map(p=>'<circle cx="'+p.x+'" cy="'+p.y+'" r="4" fill="#c6f344" stroke="#6743ee" stroke-width="2"/>').join("");
+}
+
+const associations=[
+[8,9,23,25,31,32,37,38,41,42,43,44,45,46,47,48,49,50,51,52,54,116,117],
+[80,81,91,106,126,127],
+[26,27,28,29,30,39,40,55,56,88],
+[1,2,5,6,7,10,12,13,14,15,18,20,54,64,67,89,97,98,99,100,101,104,107,120],
+[61,69,73,74,79,82,83,84,85,86,92,102,105,111,112,113,114,115,119,121,122,123,124],
+[20,54,104,107],
+[3,4,11,21,22,24,33,34,35,36,53,60,66,71,72,78,94,106,120],
+[2,14,15,16,17,19,57,58,59,65,67,87,90,93,102],
+[21,22,33,35,62,63,68,75,76,77,80,81,94,95,96,103,106,108,109,110,118,125,126,127,128],
+[69,70,73,92,93,124],
+[]];
+const categoryDescriptions=[
+"Hemograma, células sanguíneas y componentes relacionados.",
+"Indicadores nutricionales y metabólicos relacionados indirectamente con funciones neurológicas.",
+"Proteínas y enzimas relacionadas con procesos digestivos y hepatobiliares.",
+"Lípidos, lipoproteínas y otros parámetros relacionados con salud cardiovascular.",
+"Hormonas, tiroides y regulación endocrina.",
+"Parámetros inflamatorios e inmunitarios disponibles.",
+"Metabolismo renal, filtración y electrolitos.",
+"Regulación de glucosa, insulina y metabolismo energético.",
+"Vitaminas, minerales, hierro y ácidos grasos.",
+"Variables indirectamente relacionadas con metabolismo energético y respuesta al estrés.",
+"No se identificaron pruebas específicas de exposición a tóxicos en el catálogo aportado."
+];
+const fitLegacy=fit;
+fit=function(m,cat){
+ if(!cat)return true;
+ const c=cats.findIndex(x=>x[0]===cat),i=data.indexOf(m);
+ return c>=0&&i>=0&&associations[c].includes(i+1);
+};
+const oldRender=render;
+render=function(){
+oldRender();
+const i=cats.findIndex(x=>x[0]===active);
+document.getElementById("category-info").innerHTML=active?
+"<strong>"+esc(active)+"</strong><span>"+esc(categoryDescriptions[i])+" · "+data.filter(m=>fit(m,active)).length+" indicadores relacionados en el catálogo cargado.</span>":
+"<strong>Las 11 áreas de salud</strong><span>Un indicador puede aparecer en más de una categoría sin duplicarse en el catálogo de 128. Las asociaciones son orientativas y se podrán auditar.</span>";
+const unmatched=data.filter(m=>!cats.some(c=>fit(m,c[0])));
+document.getElementById("unassigned").textContent=data.length&&unmatched.length?
+unmatched.length+" análisis todavía sin asociación de categoría específica; siguen disponibles mediante búsqueda y lista general.":"";
+};
+function setView(med){
+document.getElementById("indicadores").classList.toggle("medical",med);document.getElementById("overlay").classList.toggle("medical",med);
+document.getElementById("basic").classList.toggle("selected",!med);
+document.getElementById("medical").classList.toggle("selected",med);
+document.getElementById("medical-note").style.display=med?"block":"none";
+}
+document.getElementById("basic").addEventListener("click",()=>setView(false));
+document.getElementById("medical").addEventListener("click",()=>setView(true));
+
+/* Curated explanations: do not synthesize clinical interpretation from classifications */
+const explainerCatalog=[
+{test:/apolipoprotein b/i,name:"Apolipoproteína B (ApoB)",desc:"Proteína presente en partículas lipoproteicas que transportan colesterol. Su medición puede contribuir a la evaluación del riesgo cardiovascular.",context:"El valor individual debe interpretarse junto con antecedentes, perfil lipídico y evaluación clínica.",url:"https://medlineplus.gov/ency/article/003502.htm"},
+{test:/hemoglobin a1c|hba1c|glycated hemoglobin/i,name:"Hemoglobina glucosilada (HbA1c)",desc:"Refleja aproximadamente el promedio de glucosa sanguínea durante los últimos dos a tres meses.",context:"La interpretación puede verse afectada por condiciones que alteran los glóbulos rojos.",url:"https://medlineplus.gov/lab-tests/hemoglobin-a1c-hba1c-test/"},
+{test:/^creatinine$/i,name:"Creatinina",desc:"Producto del metabolismo muscular eliminado por los riñones. Se utiliza junto con otros datos para valorar la función renal.",context:"La creatinina aislada no equivale a una estimación completa de la filtración renal.",url:"https://www.kidney.org/kidney-topics/creatinine"},
+{test:/^glucose$/i,name:"Glucosa",desc:"Mide la concentración de azúcar en la sangre en el momento de la prueba.",context:"La interpretación depende, entre otros factores, del ayuno y del motivo de la medición.",url:"https://medlineplus.gov/lab-tests/blood-glucose-test/"},
+{test:/ferritin/i,name:"Ferritina",desc:"Proteína relacionada con el almacenamiento de hierro en el organismo.",context:"Sus concentraciones también pueden variar durante procesos inflamatorios.",url:"https://medlineplus.gov/lab-tests/ferritin-blood-test/"},
+{test:/^hemoglobin$/i,name:"Hemoglobina",desc:"Proteína de los glóbulos rojos encargada del transporte de oxígeno.",context:"Se interpreta junto con otros parámetros del hemograma.",url:"https://medlineplus.gov/lab-tests/hemoglobin-test/"},
+{test:/^triglycerides$/i,name:"Triglicéridos",desc:"Tipo de grasa que circula en sangre y forma parte del perfil metabólico y cardiovascular.",context:"Su valoración debe considerar el contexto del análisis y otros factores de riesgo.",url:"https://medlineplus.gov/lab-tests/triglycerides-test/"},
+{test:/^ldl cholesterol$/i,name:"Colesterol LDL",desc:"Mide el colesterol transportado en lipoproteínas de baja densidad, asociado con riesgo cardiovascular.",context:"Los objetivos terapéuticos dependen del riesgo clínico individual.",url:"https://medlineplus.gov/lab-tests/cholesterol-levels/"}
+];
+const crossHealth=[
+{title:"Sueño",test:/BUN\/Creatinine|Potassium|Hemoglobin|Cortisol|Ferritin|TSH|Vitamin D/i},
+{title:"Esfuerzo",test:/BUN\/Creatinine|Potassium|High.sensitivity C.reactive|Hemoglobin|Estradiol|Ferritin|Free testosterone|TSH|Vitamin D/i},
+{title:"Fitness",test:/Apolipoprotein B|BUN\/Creatinine|Triglycerides|Potassium|High.sensitivity C.reactive|Hemoglobin|Cortisol|Estradiol|Ferritin|Free testosterone|HOMA.IR/i}
+];
+function openEducationalDetails(m){
+const match=explainerCatalog.find(x=>x.test.test(m.indicador));
+document.getElementById("dnames").textContent=match&&match.name!==m.indicador?"Nombre en el archivo: "+m.indicador:"";
+document.getElementById("dmeaning").textContent=match?match.desc:"Este análisis forma parte del catálogo de indicadores de sangre. Su explicación científica individual está pendiente de revisión editorial y validación de fuentes.";
+document.getElementById("dcontext").textContent=match?match.context:"No se generan interpretaciones clínicas automáticas a partir de la clasificación importada.";
+const link=document.getElementById("dsource-link");link.textContent=match?"Consultar fuente científica":"Fuente individual pendiente";
+if(match){link.href=match.url}else{link.removeAttribute("href")}
+let areas=cats.filter(c=>fit(m,c[0])).map(c=>'<span class="tag">'+esc(c[0])+'</span>');
+let health=crossHealth.filter(x=>x.test.test(m.indicador)).map(x=>'<span class="tag health">Healthspan · '+esc(x.title)+'</span>');
+document.getElementById("dareas").innerHTML=areas.concat(health).join("");
+document.getElementById("dunit").textContent=m.unidad||"No especificada";
+document.getElementById("dsample").textContent=m.fecha_muestra||"No disponible";
+}
+const previousShow=show;
+show=function(m){
+ previousShow(m);openEducationalDetails(m);if(metricLocalization[m.indicador]){document.getElementById("dname").textContent=displayMetric(m);}
+ if(/Systemic Immune-Inflammation Index/i.test(m.indicador)){
+ document.getElementById("dmeaning").textContent="Índice calculado a partir del recuento de plaquetas, neutrófilos y linfocitos de un hemograma, no una medición independiente.";
+ document.getElementById("dcontext").textContent="Cálculo con los componentes disponibles: 266 × 5.780 ÷ 2.910 ≈ 528,3. La fuente original presenta SII = 528 como «Óptimo» entre 200 y 550 en su escala visual. La etiqueta original se conserva, pero estos límites no son umbrales clínicos universales y este índice no diagnostica inflamación por sí solo.";
+ document.getElementById("dsource-link").textContent="Consultar explicación científica";
+ document.getElementById("dsource-link").href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11579835/";
+ }
+ if(/^Non-HDL Cholesterol$/i.test(m.indicador)){
+ document.getElementById("dmeaning").textContent="Colesterol no HDL: diferencia entre colesterol total y colesterol HDL.";
+ document.getElementById("dcontext").textContent="La fuente original registra colesterol no HDL = 178 mg/dL el 9 de septiembre de 2026 y lo clasifica «Fuera de rango». El colesterol total ese mismo día fue 218 mg/dL; 214 mg/dL corresponde al 7 de noviembre y no debe combinarse con el resultado de septiembre. El cálculo 218 − HDL = 178 sería correcto si HDL de septiembre fue 40 mg/dL, dato todavía pendiente de confirmar en el informe. Se mantiene el resultado original, sin inventar una medición de HDL.";
+ document.getElementById("dsource-link").textContent="Referencia sobre cálculo de colesterol no HDL";
+ document.getElementById("dsource-link").href="https://www.ncbi.nlm.nih.gov/books/NBK355893/";
+ }
+};
+
+render();
+async function loadPublicData(){
+try{
+ const bytes=Uint8Array.from(atob("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"), c=>c.charCodeAt(0));
+ const body=new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
+ const parsed=JSON.parse(await new Response(body).text());
+ const verification=auditMedicalCatalog(parsed.indicadores);
+ data=parsed.indicadores;
+ const statuses=["Óptimo","Suficiente","Fuera de rango","Sin datos disponibles"];
+ const colors=["#c8fc48","#88c0d1","#e63643","#b1b3bf"];
+ const counts=statuses.map(s=>data.filter(m=>state(m)===s).length);
+ document.getElementById("available").textContent=verification.measured;
+ document.getElementById("total").textContent="de "+verification.total+" en catálogo";
+ document.getElementById("line").innerHTML=counts.map((n,i)=>'<span style="background:'+colors[i]+';flex:'+n+'"></span>').join("");
+ document.getElementById("legend").innerHTML=counts.map((n,i)=>'<span>● '+n+' '+esc(labels[statuses[i]])+'</span>').join("");
+ document.getElementById("audit-status").innerHTML="<b>Integridad verificada:</b> 128 únicos · 56 resultados · 72 sin datos · 0 duplicados.";
+ document.getElementById("alert").innerHTML='<span class="lime">Datos publicados con autorización</span> · 128 indicadores completos · Actualización 7 nov. 2026 · Los resultados se muestran automáticamente.';
+ render();
+}catch(err){document.getElementById("alert").textContent="No se pudieron cargar los datos automáticamente: "+err.message;}
+}
+
+
+const publishedRender=render;
+render=function(){
+ publishedRender();
+ document.getElementById("tiles").innerHTML='<button type="button" class="tile '+(!active?"on":"")+'" data-side=""><i>◈</i><span>Todas las categorías</span><span class="sub">'+data.length+'</span></button>'+cats.map(([name,icon],i)=>'<button type="button" class="tile '+(active===name?"on":"")+'" data-side="'+i+'"><i>'+icon+'</i><span>'+esc(name)+'</span><span class="sub">'+data.filter(m=>fit(m,name)).length+'</span></button>').join("");
+ document.querySelectorAll("[data-side]").forEach(btn=>btn.addEventListener("click",()=>{active=btn.dataset.side===""?"":cats[+btn.dataset.side][0];selCat.value=active;render()}));
+ document.getElementById("results").innerHTML=resultsVisible.map((m,i)=>{
+ const st=state(m);
+ const k=st==="Óptimo"?"optimo":st==="Suficiente"?"suficiente":st==="Fuera de rango"?"fuera":"sin";
+ const label=st==="Fuera de rango"?"Fuera de rango":st==="Sin datos disponibles"?"Sin resultados":st;
+ const category=cats.find(c=>fit(m,c[0]))?.[0]||"Otras";
+ const num=m.valor===null?"—":esc(m.valor);
+ return '<div class="result" role="button" tabindex="0" data-row="'+i+'"><span class="name">'+esc(m.indicador)+'</span><span class="value '+(st==="Fuera de rango"?"abnormal-value":"")+'">'+num+'</span><span class="unit">'+esc(m.unidad||"—")+'</span><span><span class="pill '+k+'">'+esc(label)+'</span></span><span class="category">'+esc(category)+'</span><span class="arrow">›</span></div>'
+ }).join("");
+ document.querySelectorAll("[data-row]").forEach(el=>{const open=()=>show(resultsVisible[+el.dataset.row]);el.addEventListener("click",open);el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open()}})});
+ document.getElementById("count").textContent=data.length?resultsVisible.length+" de "+data.length+" indicadores":"Preparando resultados";
+ const ct=document.getElementById("tiles");
+ if(data.length&&ct)ct.setAttribute("aria-label","11 categorías de salud");
+ document.getElementById("stat-total").textContent=data.length||"128";
+ document.getElementById("stat-opt").textContent=data.filter(m=>state(m)==="Óptimo").length||"31";
+ document.getElementById("stat-suf").textContent=data.filter(m=>state(m)==="Suficiente").length||"10";
+ document.getElementById("stat-review").textContent=data.filter(m=>state(m)==="Fuera de rango").length||"15";
+ document.getElementById("stat-missing").textContent=data.filter(m=>state(m)==="Sin datos disponibles").length||"72";document.getElementById("stat-measured").textContent=data.filter(m=>m.valor!==null&&Number.isFinite(Number(m.valor))).length;
+};
+
+
+function isDerived(m){return /Atherogenic Index of Plasma|BUN\/Creatinine Ratio|LDL\/HDL Ratio|Non-HDL Cholesterol|Remnant Cholesterol|Triglycerides\/HDL Ratio|Estimated Average Glucose|Corrected Calcium|Albumin\/Globulin Ratio|FIB-4 Index|Systemic Immune-Inflammation Index/i.test(m.indicador)}
+/* For ranges, only ApoB has documented limits from the supplied reference.
+   Do not manufacture quantitative intervals for other markers. */
+
+function sourcedRangeBar(v,min,max,bands,label){
+ const factor=228/(max-min),x=Math.max(6,Math.min(234,6+(v-min)*factor));
+ let rect='<rect x="6" y="11" width="228" height="12" rx="5" fill="#f6d6dc"/>';
+ for(const b of bands){rect+='<rect x="'+(6+(b[0]-min)*factor).toFixed(2)+'" y="11" width="'+((b[1]-b[0])*factor).toFixed(2)+'" height="12" fill="'+b[2]+'"/>';}
+ return '<svg viewBox="0 0 240 34" role="img" aria-label="'+esc(label)+'">'+rect+'<path d="M '+x.toFixed(2)+' 9 l -5 -7 h 10 Z" fill="#5835c9"/><line x1="'+x.toFixed(2)+'" x2="'+x.toFixed(2)+'" y1="9" y2="26" stroke="#5835c9" stroke-width="2"/></svg>';
+}
+function positionGraphic(m){
+ if(/Systemic Immune-Inflammation Index/i.test(m.indicador)&&m.valor!==null)return sourcedRangeBar(Number(m.valor),0,910,[[150,200,"#a0dce9"],[200,550,"#c8ed83"],[550,700,"#a0dce9"]],"SII "+m.valor+". Óptimo de 200 a 550 según fuente; no validado como intervalo clínico universal");
+ if(/^Non-HDL Cholesterol$/i.test(m.indicador)&&m.valor!==null)return sourcedRangeBar(Number(m.valor),10,310,[[50,90,"#c8ed83"],[90,140,"#a0dce9"]],"Colesterol no HDL "+m.valor+" mg/dL. Óptimo de 50 a 90, suficiente de 90 a 140 según la fuente");
+
+ if(m.valor===null)return '<span class="range-empty">Sin medición</span>';
+ if(/(triglycerid|triglicérid).*hdl|hdl.*(triglycerid|triglicérid)|tg\s*\/\s*hdl/i.test(m.indicador)){
+ const v=Number(m.valor);if(!Number.isFinite(v))return '<span class="range-empty">Sin escala verificada</span>';
+ const px=Math.max(6,Math.min(234,6+228*v/20));
+ return '<svg viewBox="0 0 240 34" role="img" aria-label="Relación triglicéridos HDL '+esc(v)+'. Zona óptima de 0,5 a 1,7; suficiente de 1,7 a 2,9; fuera de rango por encima de 2,9">'
+ +'<rect x="6" y="11" width="228" height="12" rx="5" fill="#f6d6dc"/>'
+ +'<rect x="11.7" y="11" width="13.68" height="12" fill="#c8ed83"/>'
+ +'<rect x="25.38" y="11" width="13.68" height="12" fill="#a0dce9"/>'
+ +'<path d="M '+px.toFixed(1)+' 9 l -5 -7 h 10 Z" fill="#5835c9"/>'
+ +'<line x1="'+px.toFixed(1)+'" x2="'+px.toFixed(1)+'" y1="9" y2="26" stroke="#5835c9" stroke-width="2"/>'
+ +'</svg>';
+ }
+ const isTrig=/triglycerid|triglicérid/i.test(m.indicador);
+ if(isTrig){const v=Number(m.valor);if(!Number.isFinite(v))return '<span class="range-empty">Sin escala verificada</span>';const x=Math.max(6,Math.min(234,6+(v/350)*228));return '<svg viewBox="0 0 240 34" role="img" aria-label="Triglicéridos '+esc(v)+' mg/dL. Óptimo 30 a 100, suficiente 100 a 150, fuera de rango por encima de 150, según la fuente original">'
+ +'<rect x="6" y="11" width="228" height="12" rx="5" fill="#f6d6dc"/>'
+ +'<rect x="25.54" y="11" width="45.6" height="12" fill="#c8ed83"/>'
+ +'<rect x="71.14" y="11" width="32.57" height="12" fill="#a0dce9"/>'
+ +'<path d="M '+x.toFixed(1)+' 9 l -5 -7 h 10 Z" fill="#5835c9"/>'
+ +'<line x1="'+x.toFixed(1)+'" x2="'+x.toFixed(1)+'" y1="9" y2="26" stroke="#5835c9" stroke-width="2"/>'
+ +'</svg>'; }
+ const isApoB=/apolipoprotein\s*b|apolipoproteína\s*b|^apob$/i.test(m.indicador);
+ if(!isApoB)return '<span class="range-empty">Sin escala verificada</span>';
+ const val=Number(m.valor);
+ if(!Number.isFinite(val))return '<span class="range-empty">Sin escala verificada</span>';
+ const x=Math.max(6,Math.min(234,6+(val/160)*228));
+ const triangle=Math.max(8,Math.min(232,x));
+ return '<svg viewBox="0 0 240 34" role="img" aria-label="ApoB '+esc(val)+' miligramos por decilitro; óptimo de 25 a 65, suficiente de 65 a 95, fuera de rango por debajo de 25 y por encima de 95, según la referencia aportada">'
+ +'<rect x="6" y="11" width="228" height="12" rx="5" fill="#f6d6dc"/>'
+ +'<rect x="41.6" y="11" width="57" height="12" fill="#c8ed83"/>'
+ +'<rect x="98.6" y="11" width="42.75" height="12" fill="#a0dce9"/>'
+ +'<path d="M '+triangle.toFixed(1)+' 9 l -5 -7 h 10 Z" fill="#5835c9"/>'
+ +'<line x1="'+x.toFixed(1)+'" x2="'+x.toFixed(1)+'" y1="9" y2="26" stroke="#5835c9" stroke-width="2"/>'
+ +'</svg>';
+}
+const previousFullListRender=render;
+render=function(){
+ previousFullListRender();
+ const holder=document.getElementById("results");
+ holder.innerHTML=resultsVisible.map((m,i)=>{
+ const st=state(m);
+ const k=st==="Óptimo"?"optimo":st==="Suficiente"?"suficiente":st==="Fuera de rango"?"fuera":st==="En revisión"?"revision":"sin";
+ const label=st==="Sin datos disponibles"?"Sin resultados":st;
+ return '<div class="result" role="button" tabindex="0" data-position-row="'+i+'" aria-label="'+esc(displayMetric(m))+', '+esc(m.valor===null?"sin resultado":m.valor+' '+(m.unidad||""))+', '+esc(label)+'">'
+ +'<span class="name">'+esc(displayMetric(m))+(isDerived(m)?'<small class="derived-tag">Calculado</small>':'')+'</span>'
+ +'<span class="value-and-unit"><strong class="'+(st==="Fuera de rango"?"abnormal-value":"")+'">'+(m.valor===null?"—":esc(m.valor))+'</strong><small>'+esc(m.unidad||"")+'</small></span>'
+ +'<span class="status-cell"><span class="pill '+k+'">'+esc(label)+'</span></span>'
+ +'<span class="range-cell">'+positionGraphic(m)+'</span><span class="arrow">›</span></div>'
+ }).join("");
+ holder.querySelectorAll("[data-position-row]").forEach(el=>{
+   const open=()=>show(resultsVisible[+el.dataset.positionRow]);
+   el.addEventListener("click",open);
+   el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open()}});
+ });
+};
+
+loadPublicData();</script></body></html>
