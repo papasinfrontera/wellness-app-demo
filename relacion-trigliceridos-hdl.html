@@ -1,0 +1,323 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Relación triglicéridos/HDL · WELLNESS APP</title>
+<style>
+:root{--purple:#6034e8;--ink:#161632;--mute:#75738b;--bg:#f6f5fb;--line:#e7e3f1;--red:#ba2337;--green:#0f8466;--lime:#c8fa48}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font:14px Inter,Arial,sans-serif;color:var(--ink);background:var(--bg)}button{font:inherit;cursor:pointer}header{height:66px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,48px);gap:12px}header strong{font-size:17px}header strong span{color:var(--purple)}header a{color:var(--purple);text-decoration:none;font-weight:750;background:#f0ebff;padding:11px 16px;border-radius:12px;font-size:12px}main{max-width:1200px;padding:22px clamp(14px,3vw,36px) 38px;margin:auto}.eyebrow{color:var(--purple);font-size:11px;font-weight:800;letter-spacing:1.3px}.headline h1{font-size:clamp(29px,3vw,38px);margin:10px 0 8px;letter-spacing:-.9px}.subtitle{line-height:1.55;color:#6a667f;font-size:14px;margin:0 0 18px;max-width:820px}.tagrow{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 19px}.tag{font-size:11px;font-weight:650;background:#ebe7fa;border-radius:10px;padding:9px 12px}.tag.health{background:#e4f7b4;color:#435b20}
+.panel{background:#fff;border:1px solid var(--line);border-radius:19px;box-shadow:0 8px 25px #21173f08;padding:21px}.summary{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric-title{font-size:12px;font-weight:650;color:#78738a}.metric-number{font-size:47px;letter-spacing:-2px;font-weight:850;margin:6px 0}.metric-number small{font-size:14px;letter-spacing:0;color:#77728d;font-weight:550}.status{display:inline-flex;align-items:center;gap:6px;background:#ffe3e8;color:#a91930;border-radius:9px;padding:8px 10px;font-size:11px;font-weight:750}.change-number{font-size:42px;letter-spacing:-1px;color:#138469;font-weight:800;margin:8px 0}.change-number small{font-size:13px;color:#706c84;font-weight:500}.changepct{color:#138469;font-weight:750}.faded{color:var(--mute);font-size:11px}.panels{display:grid;grid-template-columns:1.5fr .85fr;gap:12px;margin-top:12px}.chart-title{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:9px;margin-bottom:11px}.chart-title h2{margin:0;font-size:18px}.segment{display:flex;border:1px solid #e6e0f5;background:#f6f3fd;padding:3px;border-radius:12px}.segment button{border:0;border-radius:9px;padding:8px 13px;color:#6a6481;background:transparent;font-size:12px}.segment button.on{background:#6034e8;color:white;font-weight:650}.chart-container{position:relative;width:100%;padding:0;margin:8px 0 0;max-width:100%}.chart-container svg{display:block;width:100%;height:auto;overflow:visible}svg text{font:12px Arial,sans-serif;fill:#77728d}svg .grid{stroke:#e8e4f0;stroke-width:1;stroke-dasharray:4 5}svg .linepath{stroke:var(--purple);stroke-width:3.5;fill:none;stroke-linecap:round}svg .dot{fill:white;stroke:var(--purple);stroke-width:3;cursor:pointer}svg .dot.selected{fill:var(--lime);stroke:var(--purple);stroke-width:4}svg .dot:focus{outline:none;stroke:#ea6b39;stroke-width:5}svg .lbl{fill:#221d44;font-weight:800;font-size:15px}svg .labelDate{fill:#77738b;font-size:11px}.chart-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:9px 0 0}.chart-buttons button{padding:8px 12px;border:1px solid #e1dcf1;border-radius:9px;background:#fff;color:#524c70;font-size:11px}.chart-buttons button.selected{background:#eee7ff;border-color:#b1a4ef;color:#5b35d6;font-weight:750}.interpretation{background:#f8f7fd;border:1px solid #ece8f6;border-radius:13px;padding:16px}.interpretation h2{font-size:16px;margin:0 0 12px}.interpretation p{font-size:13px;line-height:1.6;color:#514e66;margin:0 0 14px}.interpretation strong{color:#10785d}.interpretation small{font-size:11px;color:#827d91;line-height:1.55}.history{width:100%;border-collapse:collapse;font-size:12px;margin:14px 0}.history th{text-align:left;background:#f4f0ff;font-size:12px;padding:12px}.history td{border-bottom:1px solid #eeeaf3;padding:13px 12px}.history td:nth-child(2){font-weight:800}.hidden{display:none!important}.sections{margin-top:14px}.sections>h2{font-size:21px;margin:0 0 13px}.accordion{background:#fff;border:1px solid var(--line);border-radius:17px;overflow:hidden}.accordion details+details{border-top:1px solid #eeeaf5}.accordion summary{padding:17px 19px;cursor:pointer;font-weight:740;font-size:13px;display:flex;align-items:center;justify-content:space-between;list-style:none}.accordion summary::-webkit-details-marker{display:none}.accordion summary:after{content:"+";font-size:20px;color:#6b48e3}.accordion details[open] summary:after{content:"−"}.accordion .body{padding:0 19px 18px;font-size:13px;line-height:1.68;color:#59556c}.accordion p{margin:5px 0 12px}.accordion a{color:#6034e8}.notice{font-size:11px;color:#838096;margin-top:14px;line-height:1.5}.red{color:#ba2337}.foot{font-size:11px;color:#9691a5;margin:27px 0;text-align:center}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #a599ff;outline-offset:2px}
+@media(max-width:770px){header{height:56px;padding:0 14px}header strong{font-size:14px}main{padding:17px 11px 30px}.summary,.panels{grid-template-columns:1fr}.panel{padding:15px;border-radius:16px}.metric-number{font-size:40px}.headline h1{font-size:27px}.chart-title h2{font-size:17px}.headline{margin-top:4px}.tag{font-size:10px}.chart-container svg{min-height:215px}.accordion summary{padding:15px}.panel.interpretation{order:0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.range-legend{display:flex;gap:15px;flex-wrap:wrap;margin:7px 0 4px;font-size:11px;color:#55516b}.range-legend span{display:inline-flex;align-items:center;gap:5px}.range-dot{display:inline-block;width:10px;height:10px;border-radius:4px}.range-low{background:#e85b65}.range-mid{background:#75b5df}.range-best{background:#a8d852}.chart-container .range-grid{stroke:#e2dfeb;stroke-width:1;stroke-dasharray:3 5}.chart-container .range-boundary{stroke:#ada9bf;stroke-width:1;stroke-dasharray:5 5}.chart-container .cutoff{font-weight:800;fill:#57506c}.range-scale{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 2px}.range-scale span{padding:5px 8px;background:#f5f3fa;color:#66617b;border-radius:7px;font-size:10px}@media(max-width:770px){.range-legend{gap:9px;font-size:10px}.range-scale span{font-size:9px}}
+main{max-width:1450px;padding-top:17px}.headline h1{font-size:clamp(29px,2.6vw,35px);margin:7px 0 5px}
+.tagrow{margin:0 0 12px}.subtitle{margin-bottom:12px}
+.summary{grid-template-columns:1fr 1fr 1fr;gap:12px}.summary .panel{padding:19px 20px;min-height:138px}
+.metric-number{font-size:44px;margin:8px 0 3px}.target-number{font-size:41px;font-weight:850;color:#6338ea;letter-spacing:-1.4px;margin:7px 0 4px}.target-number small{font-size:13px;letter-spacing:0;font-weight:500;color:#69657c}.target-sub{font-size:12px;font-weight:620;color:#4e467d}.target-sub+.faded{margin-top:6px}
+.summary .change-number{font-size:38px;display:flex;gap:11px;align-items:baseline;flex-wrap:wrap}.summary .change-percent{border-left:1px solid #d7d1ea;padding-left:11px;font-size:21px;letter-spacing:0;color:#138469}
+.range-panel{margin-top:12px;padding:16px 23px 13px}.range-header{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:17px}.range-header h2{font-size:17px;margin:0}.range-selected{display:inline-flex;background:#6034e8;color:white;font-weight:800;border-radius:11px;padding:8px 13px;font-size:13px}
+.range-line{display:flex;position:relative;width:100%;height:27px;overflow:visible;border-radius:12px;isolation:isolate;box-shadow:inset 0 0 0 1px #ffffff77}.zone{height:100%;display:flex;align-items:center;justify-content:center;position:relative;font-size:11px;font-weight:800;overflow:hidden}.zone:first-child{border-radius:12px 0 0 12px}.zone:last-of-type{border-radius:0 12px 12px 0}.zone-red-start{width:16.6667%;background:#ffd8de}.zone-green{width:26.6667%;background:#c9f49d;color:#2b6726}.zone-blue{width:20%;background:#b8e9ed;color:#205d69}.zone-red-end{width:36.6666%;background:#ffc5cd;color:#ad1e30}
+.range-pointer{position:absolute;top:-8px;transform:translateX(-50%);width:4px;height:42px;background:#6034e8;border-radius:3px;z-index:3;box-shadow:0 0 0 2px white}.range-pointer:before{content:"";position:absolute;top:-3px;left:-6px;border-left:8px solid transparent;border-right:8px solid transparent;border-top:10px solid #6034e8}
+.range-labels{display:flex;justify-content:space-between;font-size:10px;color:#77708e;margin-top:8px;padding:0 1px}.range-labels span:nth-child(2){margin-left:-15%}.range-labels span:nth-child(3){margin-left:-1%}.range-labels span:nth-child(4){margin-left:0}
+.distance-caption{text-align:center;font-size:12px;color:#5a39dc;margin:10px 0 0}.distance-caption b{font-weight:800}
+.panels{grid-template-columns:1.55fr .95fr;margin-top:12px}.interpretation{background:#fff}.interpretation h2{font-size:17px;margin:0 0 14px}.insight{display:flex;align-items:flex-start;gap:10px;margin:0 0 11px}.insight span{background:#e0f9e3;color:#139861;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;font-weight:850;flex-shrink:0}.insight p{margin:0;font-size:12px}.insight .red{color:#c52239}.goal-box{background:#f2edff;border-radius:13px;padding:13px;margin:16px 0}.goal-box>b{display:block;font-size:12px;color:#5f38d4;margin-bottom:9px}.goal-box>div{display:flex;gap:9px}.goal-box span{flex:1;background:#fff;border-radius:9px;text-align:center;padding:9px;font-size:11px;color:#59556b}.goal-box strong{font-size:16px;color:#322650}.interpretation small{display:block}.sections{margin-top:12px}
+@media(max-width:950px){.summary{grid-template-columns:repeat(2,minmax(0,1fr))}.result-trend{grid-column:1/-1;min-height:100px!important}.panels{grid-template-columns:1fr}}
+@media(max-width:620px){.summary{grid-template-columns:1fr}.result-trend{grid-column:auto}.summary .panel{min-height:0;padding:15px}.range-panel{padding:14px}.range-header h2{font-size:15px}.zone{font-size:8px}.zone-green span,.zone-blue span{display:none}.range-selected{font-size:11px}.range-labels{font-size:9px}.summary .change-number{font-size:34px}}
+
+/* Triglycerides detail uses the approved ApoB presentation */
+.range-line .tg-red-start{width:8.5714%;background:#ffd7dd}
+.range-line .tg-green{width:20%;background:#c9f49d;color:#2b6726}
+.range-line .tg-blue{width:14.2857%;background:#b8e9ed;color:#205d69}
+.range-line .tg-red-end{width:57.1429%;background:#ffc5cd;color:#ad1e30}
+.tg-range-labels{position:relative;height:18px;font-size:10px;color:#77708e;margin-top:7px}
+.tg-range-labels span{position:absolute;transform:translateX(-50%)}.tg-range-labels span:first-child{transform:none}.tg-range-labels span:last-child{transform:translateX(-100%)}
+.tg-range-panel .range-pointer{height:42px}
+.tg-quick-note{margin-top:9px;font-size:11px;color:#706c84}
+@media(max-width:620px){.tg-range-panel .zone span{display:none}.tg-range-labels{font-size:9px}}
+
+.ratio-panel .zone-red-start{width:2.5%;background:#ffd7dd}.ratio-panel .zone-green{width:6%;background:#c9f49d;color:#2b6726}.ratio-panel .zone-blue{width:6%;background:#b8e9ed;color:#205d69}.ratio-panel .zone-red-end{width:85.5%;background:#ffc5cd;color:#ad1e30}.ratio-panel .zone span{display:none}.ratio-panel .range-line{height:27px}.ratio-labels{position:relative;height:23px;font-size:11px;color:#77708e;margin-top:8px}.ratio-labels span{position:absolute;transform:translateX(-50%)}.ratio-labels span:first-child{transform:none}.ratio-labels span:last-child{transform:translateX(-100%)}.ratio-note{font-size:11px;color:#74708a;margin-top:8px}
+@media(max-width:620px){.ratio-labels{font-size:10px}.ratio-panel .range-pointer{height:41px}}
+
+/* Sprint 5K: desktop-fit longitudinal detail pages */
+.right-stack{display:flex;flex-direction:column;gap:9px;min-width:0}
+.knowledge{background:#fff;border:1px solid var(--line);min-width:0}
+.knowledge .accordion{display:none}
+.knowledge .tab-toolbar{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 8px}
+.knowledge .tab-toolbar button{border:1px solid #e4def3;background:#f8f5fe;border-radius:8px;padding:6px 8px;font-size:10px;font-weight:650;color:#3b3269;cursor:pointer}
+.knowledge .tab-toolbar button[aria-selected="true"]{background:#6034e8;border-color:#6034e8;color:#fff}
+.knowledge .tab-toolbar button:focus-visible{outline:3px solid #9d8df5;outline-offset:2px}
+.knowledge .knowledge-detail{color:#514c69;font-size:11px;line-height:1.45;min-height:48px}
+.knowledge .knowledge-detail p{margin:0 0 6px}
+.knowledge .knowledge-detail a{color:#6034e8;font-weight:650}
+@media(min-width:1001px){
+ header{height:50px;padding:0 28px}
+ main{max-width:1540px;padding:10px 25px 5px}
+ .headline h1{font-size:30px;margin:3px 0}
+ .eyebrow{font-size:10px}
+ .subtitle{font-size:12px;line-height:1.3;max-width:1250px;margin:0 0 7px}
+ .tagrow{gap:6px;margin:0 0 8px}
+ .tag{padding:5px 9px;font-size:10px}
+ .summary{gap:9px;grid-template-columns:repeat(3,minmax(0,1fr))}
+ .summary .panel{border-radius:13px;min-height:94px;padding:10px 14px}
+ .metric-title{font-size:10.5px}
+ .metric-number{font-size:33px;line-height:1;margin:7px 0 3px}
+ .metric-number small{font-size:12px}
+ .status{padding:4px 7px;font-size:10px}
+ .target-number{font-size:29px;line-height:1.05;margin:5px 0 2px}
+ .target-number small{font-size:11px}
+ .target-sub,.faded{font-size:10px}
+ .target-sub+.faded{margin-top:2px}
+ .summary .change-number{font-size:29px;line-height:1.1;margin:6px 0 4px}
+ .summary .change-percent{font-size:18px}
+ .range-panel{border-radius:13px;margin-top:8px;padding:9px 14px 7px}
+ .range-header{margin-bottom:11px}
+ .range-header h2{font-size:15px}
+ .range-selected{padding:5px 9px;font-size:10px}
+ .range-line{height:20px}
+ .zone{font-size:9px}
+ .range-pointer{height:32px;top:-7px}
+ .range-labels,.tg-range-labels,.ratio-labels{font-size:9px;margin-top:4px;height:16px}
+ .distance-caption{margin:2px 0 0;font-size:10px}
+ .tg-quick-note,.ratio-note{font-size:9px;margin-top:2px}
+ .panels{grid-template-columns:minmax(0,1.4fr) minmax(340px,1fr);gap:9px;margin-top:9px;align-items:stretch}
+ .panels>.panel{padding:11px 14px;border-radius:13px;overflow:hidden;min-width:0}
+ .right-stack{gap:9px}
+ .right-stack>.panel{border-radius:13px;padding:9px 12px;min-width:0}
+ .chart-title{margin-bottom:3px}
+ .chart-title h2,.interpretation h2,.knowledge h2{font-size:15px}
+ .chart-container{margin-top:1px}
+ .chart-container svg{display:block;height:clamp(172px,24vh,220px);width:100%;margin:auto}
+ .range-legend{margin:3px 0 2px}
+ .segment button{padding:5px 10px;font-size:10px}
+ .chart-buttons{gap:5px;margin:3px 0 0}
+ .chart-buttons button{padding:4px 7px;font-size:10px}
+ .notice{font-size:9px;line-height:1.3;margin-top:5px}
+ .interpretation h2{margin:0 0 6px}
+ .insight{gap:7px;margin:0 0 5px}
+ .insight span{width:18px;height:18px;font-size:10px}
+ .insight p{font-size:10px;line-height:1.32}
+ .goal-box{padding:7px;margin:6px 0;border-radius:9px}
+ .goal-box>b{font-size:10px;margin-bottom:4px}
+ .goal-box span{font-size:9px;padding:5px}
+ .goal-box strong{font-size:12px}
+ .interpretation small{font-size:9px;line-height:1.25}
+ .knowledge h2{font-size:15px;margin:0 0 7px}
+ .knowledge .tab-toolbar button{font-size:10px;padding:5px 7px}
+ .knowledge .knowledge-detail{font-size:10.5px;max-height:110px;min-height:42px;overflow:auto}
+ .foot{margin:7px 0;font-size:9px}
+}
+@media(max-width:1000px){.panels{grid-template-columns:1fr}.right-stack{display:flex}.knowledge{padding:15px}.knowledge .knowledge-detail{max-height:none}.chart-container svg{height:auto}}
+
+/* Sprint 5L — desktop typography and viewport optimization after visual audit.
+   The prior Sprint 5K overcompressed labels and SVGs. */
+@media(min-width:1001px){
+ html{font-size:16px}
+ body{font-size:15px}
+ header{height:58px}
+ header strong{font-size:17px}
+ header a{font-size:13px}
+ main{max-width:1600px;padding:14px clamp(22px,3.3vw,46px) 15px}
+ .headline h1{font-size:clamp(30px,2.55vw,38px);margin:5px 0}
+ .headline .eyebrow{font-size:12px;letter-spacing:1px}
+ .subtitle{font-size:14px;line-height:1.45;max-width:1400px;margin:0 0 9px}
+ .tagrow{margin:0 0 12px;gap:8px}
+ .tag{font-size:12px;padding:6px 11px}
+ .summary{gap:12px}
+ .summary .panel{padding:15px 18px;min-height:116px;border-radius:17px}
+ .metric-title{font-size:13px}
+ .metric-number{font-size:42px;line-height:1.05;margin:7px 0 4px}
+ .metric-number small{font-size:14px}
+ .status{font-size:12px;padding:5px 9px}
+ .target-number{font-size:39px;margin:6px 0 3px}
+ .target-number small{font-size:14px}
+ .target-sub{font-size:12px}
+ .faded{font-size:11px}
+ .target-sub+.faded{margin-top:3px}
+ .summary .change-number{font-size:38px;margin:8px 0 4px;line-height:1.15}
+ .summary .change-number small{font-size:14px}
+ .summary .change-percent{font-size:22px}
+ .range-panel{margin-top:12px;padding:14px 20px 12px;border-radius:17px}
+ .range-header{margin-bottom:16px}
+ .range-header h2{font-size:18px}
+ .range-selected{font-size:13px;padding:6px 11px}
+ .range-line{height:26px}
+ .zone{font-size:12px}
+ .range-pointer{height:38px;top:-7px}
+ .range-labels,.tg-range-labels,.ratio-labels{font-size:12px;margin-top:6px;height:19px}
+ .distance-caption{font-size:13px;margin:4px 0 0}
+ .tg-quick-note,.ratio-note{font-size:11px;margin-top:5px}
+ .panels{grid-template-columns:minmax(0,1.4fr) minmax(390px,1fr);gap:12px;margin-top:12px}
+ .panels>.panel{padding:16px 19px;border-radius:17px}
+ .right-stack{gap:12px}
+ .right-stack>.panel{padding:15px 18px;border-radius:17px}
+ .chart-title{margin-bottom:7px}
+ .chart-title h2,.interpretation h2,.knowledge h2{font-size:18px}
+ .chart-container{margin-top:5px}
+ .chart-container svg{width:100%;height:clamp(250px,33vh,335px);margin:0;max-width:none}
+ .range-legend{font-size:12px;margin:5px 0 6px}
+ .range-legend span{font-size:12px}
+ .segment button{padding:7px 12px;font-size:12px}
+ .chart-buttons{gap:8px;margin:8px 0 0}
+ .chart-buttons button{padding:6px 9px;font-size:12px}
+ .range-scale{font-size:11px}
+ .notice{font-size:11px;line-height:1.4;margin-top:7px}
+ .interpretation h2{margin:0 0 11px}
+ .insight{gap:9px;margin:0 0 10px}
+ .insight span{width:23px;height:23px;font-size:13px}
+ .insight p{font-size:13px;line-height:1.4}
+ .goal-box{padding:11px;margin:12px 0 9px;border-radius:11px}
+ .goal-box>b{font-size:12px;margin-bottom:7px}
+ .goal-box span{font-size:11px;padding:8px}
+ .goal-box strong{font-size:16px}
+ .interpretation small{font-size:11px;line-height:1.4}
+ .knowledge h2{font-size:18px;margin:0 0 10px}
+ .knowledge .tab-toolbar{gap:6px;margin-bottom:11px}
+ .knowledge .tab-toolbar button{font-size:12px;padding:7px 10px}
+ .knowledge .knowledge-detail{font-size:13px;line-height:1.5;max-height:145px;min-height:65px;overflow:auto}
+ .foot{font-size:10px;margin:12px 0 0}
+}
+@media(min-width:1001px) and (max-height:800px){
+ main{padding-top:9px;padding-bottom:7px}
+ .headline h1{font-size:30px}
+ .subtitle{font-size:12.5px}
+ .summary .panel{min-height:103px;padding:11px 15px}
+ .metric-number{font-size:36px}
+ .target-number{font-size:34px}
+ .summary .change-number{font-size:33px}
+ .range-panel{padding:10px 16px 8px}
+ .range-header{margin-bottom:10px}
+ .chart-container svg{height:clamp(190px,28vh,235px)}
+ .panels>.panel,.right-stack>.panel{padding:11px 14px}
+ .knowledge .knowledge-detail{font-size:12px;max-height:90px;min-height:45px}
+}
+@media(min-width:1001px) and (max-width:1200px){
+ .panels{grid-template-columns:minmax(0,1.28fr) minmax(345px,1fr)}
+ .insight p{font-size:12px}
+ .knowledge .tab-toolbar button{font-size:11px;padding:6px 8px}
+ .chart-container svg{height:clamp(220px,30vh,290px)}
+}
+
+/* Sprint 5M — prioritize scientific education; no redundant quick interpretation */
+.right-stack{display:flex;flex-direction:column;min-width:0;gap:0}
+.right-stack>.knowledge{flex:1;display:flex;flex-direction:column;min-height:330px}
+.knowledge h2{font-weight:800;letter-spacing:-.3px}
+.knowledge .tab-toolbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-bottom:19px}
+.knowledge .tab-toolbar button{width:100%;text-align:center;min-height:42px;padding:10px 13px;line-height:1.22;font-size:13px;font-weight:700;border-radius:10px}
+.knowledge .knowledge-detail{max-height:none;min-height:125px;overflow:auto;font-size:16px;line-height:1.65;color:#2f2d49}
+.knowledge .knowledge-detail p{margin:0 0 13px}
+.knowledge .knowledge-detail a{line-height:1.6}
+@media(min-width:1001px){
+ .panels{grid-template-columns:minmax(0,1.36fr) minmax(420px,1fr);align-items:stretch}
+ .right-stack>.knowledge{min-height:clamp(385px,47vh,530px);padding:23px 25px}
+ .knowledge h2{font-size:24px;margin:0 0 22px}
+ .knowledge .tab-toolbar{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:23px}
+ .knowledge .tab-toolbar button{font-size:14px;min-height:43px;padding:10px 12px}
+ .knowledge .knowledge-detail{font-size:17px;line-height:1.65;min-height:140px;max-height:calc(47vh - 250px);overflow:auto}
+}
+@media(min-width:1001px) and (max-height:800px){
+ .right-stack>.knowledge{min-height:350px;padding:16px 19px}
+ .knowledge h2{font-size:21px;margin-bottom:12px}
+ .knowledge .tab-toolbar{gap:6px;margin-bottom:13px}
+ .knowledge .tab-toolbar button{font-size:12px;min-height:36px;padding:7px 9px}
+ .knowledge .knowledge-detail{font-size:15px;min-height:90px;max-height:125px}
+}
+@media(max-width:1000px){
+ .right-stack>.knowledge{padding:19px;min-height:300px}
+ .knowledge h2{font-size:22px;margin-bottom:15px}
+ .knowledge .tab-toolbar button{font-size:13px;padding:10px}
+ .knowledge .knowledge-detail{font-size:15px;line-height:1.65;min-height:110px;max-height:none}
+}
+@media(max-width:480px){
+ .knowledge .tab-toolbar{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .knowledge .tab-toolbar button{font-size:12px;min-height:43px;padding:8px}
+ .knowledge .knowledge-detail{font-size:15px}
+}
+
+/* Sprint 5N: source-inspired complete educational dossier, ordered with Healthspan first */
+.knowledge .category-chips{display:flex;gap:9px;flex-wrap:wrap;margin:13px 0 15px}
+.knowledge .category-chips span{display:inline-flex;background:#eeedfa;color:#393354;border-radius:11px;padding:8px 12px;font-weight:700;font-size:13px}
+.knowledge .affected-heading{font-size:12px;font-weight:800;letter-spacing:1px;color:#69637c;margin:14px 0 5px;text-transform:uppercase}
+.knowledge .reference-note{font-size:11px;line-height:1.45;color:#766f85;margin-top:10px;border-top:1px solid #e7e3f0;padding-top:10px}
+.knowledge .knowledge-detail p+p{margin-top:17px}
+.knowledge .knowledge-detail p{white-space:normal}
+@media(min-width:1001px){.right-stack>.knowledge{min-height:clamp(385px,49vh,565px)}.knowledge .knowledge-detail{max-height:clamp(180px,29vh,295px);overflow-y:auto}.knowledge .tab-toolbar button{min-height:43px}.knowledge .affected-heading{font-size:13px}}
+@media(max-width:1000px){.knowledge .knowledge-detail{max-height:none;min-height:120px}.knowledge .category-chips span{font-size:12px}}
+
+/* Sprint 5O — one position marker composed of label, arrow, and line */
+.range-header{margin-bottom:42px!important}
+.range-header .range-selected{display:none}
+.range-line{isolation:visible}
+.range-line>.range-selected{position:absolute;z-index:8;top:auto;bottom:calc(100% + 12px);transform:translateX(-50%);display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;min-width:54px;border-radius:9px;padding:6px 10px;background:#6034e8;color:white;font-size:12px;font-weight:800;line-height:1.15;box-shadow:0 2px 6px #5630b81c;pointer-events:none}
+.range-line>.range-selected::after{content:"";position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid #6034e8}
+.range-line .range-pointer::before{display:none}
+.range-line .range-pointer{top:-6px;z-index:7}
+@media(max-width:620px){.range-header{margin-bottom:40px!important}.range-line>.range-selected{font-size:10px;padding:5px 7px;min-width:45px}}
+</style></head><body>
+<header><strong>W<span>.</span> &nbsp; WELLNESS APP</strong><a href="index.html">← Mis análisis de sangre</a></header>
+<main>
+<section class="headline"><span class="eyebrow">DETALLE DEL INDICADOR · HISTORIAL DE RESULTADOS</span><h1>Relación triglicéridos/HDL</h1>
+<p class="subtitle">Compara la concentración de triglicéridos con el colesterol HDL. Es una relación utilizada como indicador complementario del perfil metabólico; su interpretación depende del contexto clínico.</p>
+<div class="tagrow"><span class="tag">Salud metabólica</span><span class="tag">Corazón y circulación</span><span class="tag health">Healthspan · Fitness</span></div></section>
+<div class="summary">
+<section class="panel result-main" aria-live="polite"><div class="metric-title">Resultado seleccionado · <span id="selected-date">7 nov. 2026</span></div><div class="metric-number"><span id="selected-result">3,6</span> <small>relación</small></div><span class="status">● Fuera de rango</span></section>
+<section class="panel result-target"><div class="metric-title">Distancia al nivel óptimo de referencia</div><div class="target-number"><span id="distance">1,9</span> <small>puntos</small></div><div class="target-sub">por encima del límite óptimo de la fuente</div><div class="faded">Zona óptima visual: 0,5–1,7</div></section>
+<section class="panel result-trend"><div class="metric-title">Cambio longitudinal</div><div class="change-number">−4,8 <small>puntos</small><span class="change-percent">−57,1 %</span></div><div class="faded">Del 13 ago. al 7 nov. de 2026</div></section>
+</div>
+<section class="panel range-panel ratio-panel">
+<div class="range-header"><h2>Tu posición dentro del rango</h2></div>
+<div class="range-line" role="img" aria-label="Relación triglicéridos HDL de 3,6. En la referencia original la banda óptima es 0,5 a 1,7; suficiente 1,7 a 2,9; fuera de rango superior a 2,9 o inferior a 0,5.">
+<div class="zone zone-red-start" title="Fuera de rango menor que 0,5"></div><div class="zone zone-green" title="Óptimo: 0,5 a 1,7"></div><div class="zone zone-blue" title="Suficiente: 1,7 a 2,9"></div><div class="zone zone-red-end" title="Fuera de rango mayor de 2,9"></div>
+<span id="range-selected" class="range-selected" aria-live="polite" style="left:clamp(48px,18%,calc(100% - 48px))">3,6</span><span id="range-pointer" class="range-pointer" style="left:18%"></span></div>
+<div class="ratio-labels"><span style="left:0">0</span><span style="left:2.5%">0,5</span><span style="left:8.5%">1,7</span><span style="left:14.5%">2,9</span><span style="left:100%">20</span></div>
+<div class="distance-caption" id="distance-description">3,6 − 1,7 = <b>1,9 puntos</b> sobre el límite óptimo visual</div>
+<div class="ratio-note">La escala de 0 a 20 reproduce la amplitud de la captura. Por ello, las zonas verde y azul aparecen estrechas.</div>
+</section>
+<div class="panels"><section class="panel">
+<div class="chart-title"><h2>Evolución de la relación</h2><div class="segment" role="group" aria-label="Visualización"><button id="graph-btn" class="on" type="button" aria-pressed="true">Gráfico</button><button id="table-btn" type="button" aria-pressed="false">Historial</button></div></div>
+<div id="chart-wrap" class="chart-container"><div class="range-legend"><span><i class="range-dot range-low"></i>Fuera de rango</span><span><i class="range-dot range-mid"></i>Suficiente</span><span><i class="range-dot range-best"></i>Óptimo</span></div>
+<svg viewBox="0 0 630 318" role="img" aria-label="Evolución de la relación triglicéridos HDL: 8,4 el 13 de agosto y 3,6 el 7 de noviembre de 2026">
+<defs><clipPath id="ratio-clip"><rect x="68" y="36" width="522" height="207" rx="5"/></clipPath></defs>
+<g clip-path="url(#ratio-clip)">
+<rect x="68" y="36" width="522" height="177" fill="#fff0f1"/>
+<rect x="68" y="213" width="522" height="12.4" fill="#e9f5fc"/>
+<rect x="68" y="225.4" width="522" height="12.4" fill="#edfacc"/>
+<rect x="68" y="237.8" width="522" height="5.2" fill="#fff0f1"/>
+</g>
+<line x1="68" x2="590" y1="36" y2="36" class="range-grid"/><line x1="68" x2="590" y1="156.1" y2="156.1" class="range-grid"/><line x1="68" x2="590" y1="213" y2="213" class="range-boundary"/><line x1="68" x2="590" y1="225.4" y2="225.4" class="range-boundary"/><line x1="68" x2="590" y1="237.8" y2="237.8" class="range-boundary"/>
+<text x="18" y="41">20</text><text x="22" y="161">8,4</text><text x="22" y="218">2,9</text><text x="22" y="230">1,7</text><text x="22" y="243">0,5</text><text x="20" y="25">relación</text>
+<path class="linepath" d="M168 156.1 L498 205.7"/>
+<g id="point-aug" tabindex="0" role="button" aria-label="13 agosto: relación de 8,4"><circle class="dot" cx="168" cy="156.1" r="8"/><text class="lbl" x="148" y="139">8,4</text></g>
+<g id="point-nov" tabindex="0" role="button" aria-label="7 noviembre: relación de 3,6"><circle class="dot selected" cx="498" cy="205.7" r="8"/><text class="lbl" x="477" y="189">3,6</text></g>
+<text class="labelDate" x="110" y="278">13 ago. 2026</text><text class="labelDate" x="446" y="278">7 nov. 2026</text>
+</svg>
+<div class="chart-buttons"><button type="button" id="aug-btn">13 ago. · 8,4</button><button type="button" id="nov-btn" class="selected">7 nov. · 3,6</button></div></div>
+<div id="history-wrap" class="hidden"><table class="history"><thead><tr><th>Fecha</th><th>Triglicéridos/HDL</th><th>Estado</th></tr></thead><tbody><tr><td>13 ago. 2026</td><td>8,4</td><td class="red">Fuera de rango</td></tr><tr><td>7 nov. 2026</td><td>3,6</td><td class="red">Fuera de rango</td></tr></tbody></table></div>
+<div class="notice">Bandas tomadas de la referencia visual: óptimo 0,5–1,7; suficiente 1,7–2,9; fuera de rango fuera de esas zonas. No son límites clínicos universales.</div>
+</section><div class="right-stack"><section class="panel sections knowledge"><h2>Conoce tu indicador</h2><div class="accordion"><details open><summary>Impacto en Healthspan</summary><div class="body"><p>La relación triglicéridos/HDL es un indicador complementario del equilibrio entre triglicéridos y colesterol HDL. Puede aportar contexto sobre la salud metabólica y cardiovascular a largo plazo, áreas relacionadas con el Healthspan. No permite diagnosticar resistencia a la insulina ni calcular cambios en esperanza de vida saludable por sí solo.</p><div class="affected-heading">Categorías afectadas</div><div class="category-chips"><span>Salud metabólica</span><span>Fitness</span></div><p class="reference-note">La relación entre este indicador, el rendimiento y la salud a largo plazo es contextual. No permite afirmar efectos causales individuales.</p></div></details><details><summary>¿Qué es?</summary><div class="body"><p>La relación triglicéridos/HDL es el cociente entre la concentración de triglicéridos y la del colesterol HDL, ambas expresadas en las mismas unidades. Permite observar cómo cambia el equilibrio entre estas fracciones lipídicas a lo largo del tiempo. Es un índice calculado, no una prueba independiente de laboratorio.</p></div></details><details><summary>Por qué es importante</summary><div class="body"><p>En diversos estudios poblacionales, una relación más elevada se ha asociado con perfiles metabólicos menos favorables. Sin embargo, sus umbrales dependen del contexto y no existe un punto de corte universal apropiado para todas las personas. Debe interpretarse junto con el perfil lipídico completo y otros factores clínicos.</p><p class="reference-note">Las asociaciones descritas no equivalen a un diagnóstico ni son aplicables de manera idéntica a todas las personas.</p></div></details><details><summary>Relación con otros indicadores</summary><div class="body"><p>El cociente cambia cuando varían los triglicéridos, el HDL o ambos. Una reducción puede reflejar una disminución de triglicéridos, un aumento de HDL-C o una combinación. Conviene revisar también ApoB, colesterol no HDL, glucosa, HbA1c y, cuando esté indicado, insulina o parámetros hepáticos.</p><p class="reference-note">Estas relaciones pueden observarse en algunos perfiles, pero no ocurren necesariamente juntas en cada usuario.</p></div></details><details><summary>Relación con dispositivos conectados</summary><div class="body"><p>La actividad física, los patrones de sueño y los hábitos de alimentación pueden estudiarse junto con la relación triglicéridos/HDL para detectar tendencias. Los datos de dispositivos aportan contexto, pero no deben utilizarse para afirmar una relación causal sin un análisis clínico adicional.</p><p class="reference-note">No se establece causalidad entre métricas de dispositivos y resultados de laboratorio a partir de coincidencias temporales.</p></div></details><details><summary>Cómo mejorar</summary><div class="body"><p>Para favorecer un perfil metabólico saludable, prioriza la actividad física regular, una alimentación equilibrada y la revisión del consumo de azúcares refinados y alcohol cuando sea pertinente. Si existe sobrepeso, una reducción gradual de peso puede ayudar. Las recomendaciones deben adaptarse a las concentraciones reales de triglicéridos y HDL y al riesgo global.</p><p class="reference-note">Las intervenciones y, especialmente, los suplementos o tratamientos requieren valoración individual; no sustituyen el consejo profesional.</p></div></details><details><summary>Fuentes científicas</summary><div class="body"><p><a href="https://medlineplus.gov/lab-tests/triglycerides-test/" target="_blank" rel="noopener noreferrer">MedlinePlus — Triglicéridos</a></p><p><a href="https://medlineplus.gov/lab-tests/cholesterol-levels/" target="_blank" rel="noopener noreferrer">MedlinePlus — Perfil de colesterol</a></p></div></details></div></section></div></div>
+<div class="foot">WELLNESS APP</div></main>
+<script>
+"use strict";
+const samples={aug:{value:8.4,date:"13 ago. 2026"},nov:{value:3.6,date:"7 nov. 2026"}};
+function selectPoint(key){const d=samples[key];document.getElementById("selected-result").textContent=d.value.toFixed(1).replace(".",",");document.getElementById("selected-date").textContent=d.date;const delta=Math.max(0,d.value-1.7);document.getElementById("distance").textContent=delta.toFixed(1).replace(".",",");document.getElementById("range-selected").textContent=d.value.toFixed(1).replace(".",",");document.getElementById("range-pointer").style.left=Math.min(100,Math.max(0,d.value/20*100))+"%";document.getElementById("range-selected").style.left="clamp(48px,"+Math.min(100,Math.max(0,d.value/20*100))+"%,calc(100% - 48px))";document.getElementById("distance-description").innerHTML=d.value.toFixed(1).replace(".",",")+" − 1,7 = <b>"+delta.toFixed(1).replace(".",",")+" puntos</b> sobre el límite óptimo visual";for(const k of ["aug","nov"]){document.getElementById("point-"+k).querySelector("circle").classList.toggle("selected",k===key);const b=document.getElementById(k+"-btn");b.classList.toggle("selected",k===key);b.setAttribute("aria-pressed",String(k===key))}}
+for(const k of ["aug","nov"]){const e=document.getElementById("point-"+k);e.addEventListener("click",()=>selectPoint(k));e.addEventListener("keydown",ev=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();selectPoint(k)}});document.getElementById(k+"-btn").addEventListener("click",()=>selectPoint(k))}
+function setMode(mode){const chart=mode==="graph";document.getElementById("chart-wrap").classList.toggle("hidden",!chart);document.getElementById("history-wrap").classList.toggle("hidden",chart);for(const [id,on] of [["graph-btn",chart],["table-btn",!chart]]){let e=document.getElementById(id);e.classList.toggle("on",on);e.setAttribute("aria-pressed",String(on))}}
+document.getElementById("graph-btn").addEventListener("click",()=>setMode("graph"));document.getElementById("table-btn").addEventListener("click",()=>setMode("table"));
+
+(function(){
+ const section=document.querySelector(".knowledge");
+ if(!section)return;
+ const records=[...section.querySelectorAll(".accordion details")];
+ if(!records.length)return;
+ const titles=["Impacto en Healthspan","Qué es","Por qué es importante","Otros indicadores","Dispositivos conectados","Cómo mejorar","Fuentes científicas"];
+ const bar=document.createElement("div");bar.className="tab-toolbar";bar.setAttribute("role","tablist");bar.setAttribute("aria-label","Información del indicador");
+ const content=document.createElement("div");content.className="knowledge-detail";content.id="knowledge-panel";content.setAttribute("role","tabpanel");
+ function select(i){
+  content.innerHTML=records[i].querySelector(".body").innerHTML;
+  [...bar.children].forEach((el,n)=>{el.setAttribute("aria-selected",String(n===i));el.tabIndex=n===i?0:-1});
+ }
+ records.forEach((record,i)=>{
+  const button=document.createElement("button");button.type="button";button.setAttribute("role","tab");button.setAttribute("aria-controls","knowledge-panel");
+  button.textContent=titles[i]||record.querySelector("summary").textContent;
+  button.addEventListener("click",()=>select(i));
+  button.addEventListener("keydown",event=>{const step=event.key==="ArrowRight"?1:event.key==="ArrowLeft"?-1:0;if(step){event.preventDefault();const next=(i+step+records.length)%records.length;select(next);bar.children[next].focus()}});
+  bar.append(button);
+ });
+ section.querySelector(".accordion").before(bar,content);
+ select(0);
+})();
+</script></body></html<script async data-explicit-opt-in="true" data-deployment-id="dpl_CLgFNat9JCZD4roUn32oazwo3Y7Z" src="https://vercel.live/_next-live/feedback/feedback.js"></script></html>
